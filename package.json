@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tw-build": "tailwindcss -i ./assets/css/input.css -o ./tw.css --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "blockBuild": "wp-scripts build",
-    "blockStart": "wp-scripts start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -23,7 +21,9 @@
   "homepage": "https://github.com/cascade-coding/dental_design_theme#readme",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.3",
+    "@wordpress/icons": "^10.21.0",
     "@wordpress/scripts": "^30.14.1",
+    "axios": "^1.8.4",
     "tailwindcss": "^4.1.3"
   }
 }

@@ -12,8 +12,8 @@
   --color-primary-800: #125d58;
   --color-primary-900: #144d49;
   --color-primary-950: #053332;
-  
-  --color-secondary-50: #FFF2F1;
+
+  --color-secondary-50: #fff2f1;
   --color-secondary-100: #ffe2df;
   --color-secondary-200: #ffcac5;
   --color-secondary-300: #ffa69d;
@@ -25,9 +25,51 @@
   --color-secondary-900: #881e14;
   --color-secondary-950: #4b0a04;
 
-  --color-accent-300: #FFE97F;
-  --color-accent-400: #FFE359;
-  --color-accent-500: #FFD700;
+  --color-accent-300: #ffe97f;
+  --color-accent-400: #ffe359;
+  --color-accent-500: #ffd700;
 
-  
+  /* fonts */
+  --font-primary: Montserrat, sans-serif;
+  --font-base: "Open Sans", sans-serif;
+}
+
+@layer components {
+  .primary-medium {
+    @apply font-medium font-primary text-base;
+  }
+
+  .primary-nav-link {
+    @apply !no-underline border-b border-b-transparent hover:border-b-accent-300 px-3 py-2 text-neutral-50 hover:bg-primary-600 hover:text-white font-medium font-primary text-base;
+  }
+
+  .main-navigation-lg > div > ul#primary-menu > li {
+    @apply relative;
+  }
+
+  .main-navigation-lg > div > ul#primary-menu > li > a {
+    @apply !no-underline border-b border-b-transparent hover:border-b-accent-300 px-3 py-2 mx-2 text-neutral-50 hover:bg-primary-600 hover:text-white font-medium font-primary text-base;
+  }
+
+  .main-navigation-lg > div > ul#primary-menu {
+    @apply flex;
+  }
+
+  .main-navigation-lg > div > ul#primary-menu > li > ul.sub-menu {
+    @apply fixed left-0 top-[124px] w-screen min-h-[200px] bg-primary-800 z-50;
+
+  }
+
+  .main-navigation-lg > div > ul#primary-menu > li > ul.sub-menu > li:only-child > a {
+
+    @apply bg-amber-400
+
+  }
+
+
+   
+}
+
+body {
+  font-family: "Open Sans";
 }
