@@ -18,12 +18,27 @@ subMenus.forEach((item) => {
   }
 
   list_items.forEach((item) => {
-    item.querySelector("ul").classList.add("submenu-links");
+    if (list_items.length > 1 && item.querySelector("ul.sub-menu") === null) {
+      item.classList.add("!pb-3");
+      item.querySelector("a").classList.add("submenu-link");
+    } else {
+      item.classList.add("!pb-6");
+
+      console.log(item.querySelector("a").href.slice(-1), "iiii");
+
+      if (item.querySelector("a").href.slice(-1) === "#") {
+        item
+          .querySelector("a")
+          .classList.add(
+            "!font-semibold",
+            "!text-neutral-600",
+            "pointer-events-none"
+          );
+      }
+
+      item.querySelector("a").classList.add("regular-menu-subtitle");
+    }
+
+    item.classList.add("submenu-links");
   });
-
-  
 });
-
-// console.log(subMenus);
-
-// .main-navigation-lg > div > ul#primary-menu > li > ul.sub-menu

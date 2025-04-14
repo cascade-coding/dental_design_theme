@@ -64,7 +64,7 @@
     > ul#primary-menu
     > li
     > ul.sub-menu
-    > li.menu-item-has-children {
+    > li {
     @apply relative block mx-auto max-w-7xl lg:px-6 xl:px-8;
   }
 
@@ -72,18 +72,27 @@
     @apply font-primary text-3xl font-semibold leading-10 tracking-wide !no-underline py-4 block text-neutral-600 border-b mb-4 px-2 border-b-neutral-400;
   }
 
-  .submenu-links {
+  .submenu-links ul {
     @apply list-none p-0 gap-20;
     column-count: 3;
   }
 
-  .submenu-links li > a {
+  .submenu-links ul li > a {
     @apply text-neutral-950 !no-underline py-1 my-2.5 block transition-all ease-in-out;
   }
 
-  .submenu-links li > a:hover {
+  .submenu-link {
+    @apply text-neutral-950 !no-underline py-1 my-2.5 block transition-all ease-in-out;
+  }
+
+  .submenu-links ul li > a:hover {
     @apply text-neutral-600;
   }
+
+  .regular-menu-subtitle {
+    @apply font-primary text-lg font-medium leading-10 tracking-wide !no-underline block text-neutral-950;
+  }
+
 
   /* .main-navigation-lg > div > ul#primary-menu > li > ul.sub-menu > li:only-child  {
 
