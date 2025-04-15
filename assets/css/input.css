@@ -168,6 +168,12 @@
   #toggle-mobile-menu.mobile-menu-open #close_icon {
     @apply !block;
   }
+
+  /* custom logo */
+
+  .custom-logo a img {
+    @apply h-10 w-auto;
+  }
 }
 
 body {

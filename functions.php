@@ -157,12 +157,12 @@ function dental_design_scripts()
 	wp_enqueue_script('dental_design-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
 	wp_enqueue_script(
-        'custom-js',
-        get_template_directory_uri() . '/assets/js/app.js', // file path
-        array(), 
-        null, 
-        true 
-    );
+		'custom-js',
+		get_template_directory_uri() . '/assets/js/app.js', // file path
+		array(),
+		null,
+		true
+	);
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -203,14 +203,37 @@ if (defined('JETPACK__VERSION')) {
 
 
 
+// add phone number customizer option
 
+function dental_design_customize_register_x($wp_customize)
+{
+	$wp_customize->add_section('dental_design_contact_section', array(
+		'title'       => __('Contact Info', 'dental_design'),
+		'priority'    => 30,
+	));
 
+	// phone number
+	$wp_customize->add_setting('dental_design_phone_number', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+	));
 
+	$wp_customize->add_control('dental_design_phone_number', array(
+		'label'    => __('Phone Number', 'dental_design'),
+		'section'  => 'dental_design_contact_section',
+		'settings' => 'dental_design_phone_number',
+		'type'     => 'text',
+	));
 
-// // In functions.php
-// function theme_register_menus() {
-//     register_nav_menus([
-//         'primary' => 'Primary Menu',
-//     ]);
-// }
-// add_action('after_setup_theme', 'theme_register_menus');
+	// address
+	$wp_customize->add_setting('dental_design_address', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+	));
+	$wp_customize->add_control('dental_design_address', array(
+		'label'    => __('Business Address', 'mytheme'),
+		'section'  => 'dental_design_contact_section',
+		'type'     => 'text',
+	));
+}
+add_action('customize_register', 'dental_design_customize_register_x');
