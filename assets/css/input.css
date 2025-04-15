@@ -43,6 +43,7 @@
     @apply !no-underline border-b border-b-transparent hover:border-b-accent-300 px-3 py-2 text-neutral-50 hover:bg-primary-600 hover:text-white font-medium font-primary text-base;
   }
 
+  /* menu lg */
   .main-navigation-lg > div > ul#primary-menu > li {
     @apply relative;
   }
@@ -59,12 +60,7 @@
     @apply fixed left-0 top-[124px] w-screen min-h-[200px] bg-primary-100 z-50 pb-12 pt-8;
   }
 
-  .main-navigation-lg
-    > div
-    > ul#primary-menu
-    > li
-    > ul.sub-menu
-    > li {
+  .main-navigation-lg > div > ul#primary-menu > li > ul.sub-menu > li {
     @apply relative block mx-auto max-w-7xl lg:px-6 xl:px-8;
   }
 
@@ -93,12 +89,85 @@
     @apply font-primary text-lg font-medium leading-10 tracking-wide !no-underline block text-neutral-950;
   }
 
+  .main-navigation-lg
+    > div
+    > ul#primary-menu
+    > li.menu-item-has-children
+    > ul.sub-menu {
+    @apply hidden;
+  }
 
-  /* .main-navigation-lg > div > ul#primary-menu > li > ul.sub-menu > li:only-child  {
+  .main-navigation-lg
+    > div
+    > ul#primary-menu
+    > li.menu-item-has-children:hover
+    > ul.sub-menu {
+    @apply !block;
+  }
 
-    @apply bg-amber-400
+  /* 
+  
+  
+  
+  menu-sm
+  
+  
+  
+  */
+  .main-navigation-sm > div {
+    @apply w-full;
+  }
 
-  } */
+  .main-navigation-lg > div > ul#primary-menu {
+    @apply flex;
+  }
+
+  .main-navigation-sm > div > ul#primary-menu > li {
+    @apply relative !block;
+  }
+
+  .main-navigation-sm > div > ul#primary-menu > li > a {
+    @apply !block !no-underline border-b border-b-transparent hover:border-b-accent-300 px-3 py-2 mx-2 text-neutral-50 hover:bg-primary-600 hover:text-white font-medium font-primary text-base;
+  }
+
+  .main-navigation-sm > div > ul#primary-menu > li > ul.sub-menu {
+    @apply px-8;
+  }
+
+  .submenu-links-sm ul {
+    @apply flex flex-col gap-y-1.5;
+  }
+
+  .submenu-links-sm ul li > a {
+    @apply text-neutral-50 !no-underline py-1 my-2.5 block transition-all ease-in-out;
+  }
+
+  .submenu-link-sm {
+    @apply text-neutral-300 !no-underline py-1 my-2.5 block transition-all ease-in-out;
+  }
+
+  .submenu-links-sm ul li > a:hover {
+    @apply text-neutral-600;
+  }
+
+  .regular-menu-subtitle-sm {
+    @apply font-primary text-lg font-medium leading-10 tracking-wide !no-underline block text-neutral-100;
+  }
+
+  /* 
+  
+  mobile menu states
+  
+  
+  */
+
+  #toggle-mobile-menu.mobile-menu-open #menu_icon {
+    @apply !hidden;
+  }
+
+  #toggle-mobile-menu.mobile-menu-open #close_icon {
+    @apply !block;
+  }
 }
 
 body {
