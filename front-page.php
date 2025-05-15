@@ -26,7 +26,7 @@ get_header();
             <!-- logo -->
             <div class="flex flex-1 items-center justify-center lg:items-end lg:self-end lg:pb-2 lg:justify-start">
                 <div class="flex shrink-0 items-center">
-                    
+
                     <div class="custom-logo">
                         <?php if (has_custom_logo()) : ?>
                             <?php the_custom_logo(); ?>
@@ -56,11 +56,17 @@ get_header();
 
                             <p class="text-neutral-50 primary-medium">
                                 <?php if (get_theme_mod('dental_design_address')) : ?>
-                                    <?php echo esc_html(get_theme_mod('dental_design_address')); ?>
+                                    <span class="business-address"> <?php echo esc_html(get_theme_mod('dental_design_address')); ?></span>
                                 <?php else : ?>
-                                    850 Madison Ave, Suite 205, New York, NY 10021
+                                    <span class="business-address">850 Madison Ave, Suite 205, New York, NY 10021</span>
                                 <?php endif; ?>
                             </p>
+
+                            <!-- <div class="contact-info">
+                                <span class="phone-number"><?php echo esc_html(get_theme_mod('dental_design_phone_number', '')); ?></span>
+                                <span class="business-address"><?php echo esc_html(get_theme_mod('dental_design_address', '')); ?></span>
+                            </div> -->
+
                         </div>
 
                         <button class="flex items-center justify-center gap-x-3 bg-accent-500 hover:bg-accent-300 px-6 py-1.5 rounded-full cursor-pointer">
@@ -72,12 +78,12 @@ get_header();
                             <span class="text-neutral-950 primary-medium">
 
                                 <?php if (get_theme_mod('dental_design_phone_number')) : ?>
-                                    <a href="tel:<?php echo esc_attr(get_theme_mod('dental_design_phone_number')); ?>" class="!no-underline">
+                                    <a href="tel:<?php echo esc_attr(get_theme_mod('dental_design_phone_number')); ?>" class="!no-underline phone-number">
                                         <?php echo esc_html(get_theme_mod('dental_design_phone_number')); ?>
                                     </a>
 
                                 <?php else : ?>
-                                    <a href="tel:(555) 123-4567" class="!no-underline">
+                                    <a href="tel:(555) 123-4567" class="!no-underline phone-number">
                                         (555) 123-4567
                                     </a>
                                 <?php endif; ?>
@@ -125,6 +131,85 @@ get_header();
 
 </nav>
 
+
+
+
+<!-- Swiper -->
+<div class="swiper swiper-home-top bg-accent-500 !h-[600px]">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide relative">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-1.jpeg" alt="" srcset="">
+            <div class="absolute bottom-0 right-0 bg-primary-100/50 py-4 px-6 pr-16">
+                <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</p>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-2.jpg" alt="" srcset="">
+            <div class="absolute bottom-0 right-0 bg-primary-100/50 py-4 px-6 pr-16">
+                <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Give you and your family <br>
+                    the best personalized dental experience!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br>
+<br>
+<br>
+
+
+
+<?php
+$args = array(
+    'post_type' => 'slider',
+    'meta_key' => '_slider_type',
+    'meta_value' => 'home-top',
+    'posts_per_page' => -1, // get all sliders with that type
+    'orderby' => 'menu_order', // optional, if you want to order them
+    'order' => 'ASC',
+);
+
+$slider_query = new WP_Query($args);
+
+if ($slider_query->have_posts()) {
+    while ($slider_query->have_posts()) {
+        $slider_query->the_post();
+
+        $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
+        $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
+        $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
+        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+        $title = get_the_title();
+
+?>
+        <div class="slider-item">
+            <?php if ($image_url): ?>
+                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>">
+            <?php endif; ?>
+
+            <?php if ($title): ?>
+                <h2><?php echo esc_html($title); ?></h2>
+            <?php endif; ?>
+
+            <?php if ($subtext): ?>
+                <p><?php echo esc_html($subtext); ?></p>
+            <?php endif; ?>
+
+            <?php if ($button_text && $button_link): ?>
+                <a href="<?php echo esc_url($button_link); ?>" class="slider-button">
+                    <?php echo esc_html($button_text); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+<?php
+    }
+    wp_reset_postdata();
+} else {
+    echo '<p>No sliders found for this section.</p>';
+}
+?>
 
 
 

@@ -149,20 +149,34 @@ function dental_design_scripts()
 	wp_enqueue_style(
 		'dental_design-tw',
 		get_template_directory_uri() . '/tw.css',
-		array('dental_design-style'), // Depends on main style
+		array('dental_design-style'),
 		filemtime(get_template_directory() . '/tw.css')
 	);
 
 
 	wp_enqueue_script('dental_design-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
+	// swiperjs
+	wp_enqueue_style(
+		'swiper-css',
+		get_template_directory_uri() . '/assets/css/swiperjs.css',
+		array('dental_design-tw'),
+		filemtime(get_template_directory() . '/assets/css/swiperjs.css')
+	);
+
+
+
+	wp_enqueue_script('swiper-js', get_template_directory_uri() . '/assets/js/swiperjs.js', [], null, true);
+
+
 	wp_enqueue_script(
 		'custom-js',
 		get_template_directory_uri() . '/assets/js/app.js', // file path
-		array(),
+		['swiper-js'],
 		null,
 		true
 	);
+
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -203,19 +217,23 @@ if (defined('JETPACK__VERSION')) {
 
 
 
+// ! customizer settings
+
 // add phone number customizer option
+
 
 function dental_design_customize_register_x($wp_customize)
 {
 	$wp_customize->add_section('dental_design_contact_section', array(
-		'title'       => __('Contact Info', 'dental_design'),
-		'priority'    => 30,
+		'title'    => __('Contact Info', 'dental_design'),
+		'priority' => 30,
 	));
 
-	// phone number
+	// Phone number
 	$wp_customize->add_setting('dental_design_phone_number', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage', // for live preview
 	));
 
 	$wp_customize->add_control('dental_design_phone_number', array(
@@ -225,15 +243,160 @@ function dental_design_customize_register_x($wp_customize)
 		'type'     => 'text',
 	));
 
-	// address
+	// Address
 	$wp_customize->add_setting('dental_design_address', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage',
 	));
+
 	$wp_customize->add_control('dental_design_address', array(
-		'label'    => __('Business Address', 'mytheme'),
+		'label'    => __('Business Address', 'dental_design'),
 		'section'  => 'dental_design_contact_section',
+		'settings' => 'dental_design_address',
 		'type'     => 'text',
 	));
+
+	// Selective refresh partials (for pencil icon)
+	if (isset($wp_customize->selective_refresh)) {
+		$wp_customize->selective_refresh->add_partial('dental_design_phone_number', array(
+			'selector'        => '.phone-number', // target this in your HTML
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_phone_number', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_address', array(
+			'selector'        => '.business-address',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_address', ''));
+			},
+		));
+	}
 }
 add_action('customize_register', 'dental_design_customize_register_x');
+
+
+
+
+
+
+
+
+
+
+
+// ! custom post types
+
+// Register Custom Post Type: Slider
+function register_slider_post_type()
+{
+	$labels = array(
+		'name' => 'Sliders',
+		'singular_name' => 'Slider',
+		'menu_name' => 'Sliders',
+		'add_new' => 'Add New Slider',
+		'add_new_item' => 'Add New Slider',
+		'edit_item' => 'Edit Slider',
+		'new_item' => 'New Slider',
+		'view_item' => 'View Slider',
+		'search_items' => 'Search Sliders',
+		'not_found' => 'No sliders found.',
+		'not_found_in_trash' => 'No sliders found in Trash.',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => false,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 20,
+		'menu_icon' => 'dashicons-images-alt2',
+		'supports' => array('title', 'thumbnail'),
+		'show_in_rest' => true,
+	);
+
+	register_post_type('slider', $args);
+}
+add_action('init', 'register_slider_post_type');
+
+// Add Meta Box for Slider
+function add_slider_meta_box()
+{
+	add_meta_box(
+		'slider_meta_box',
+		'Slider Details',
+		'render_slider_meta_box',
+		'slider',
+		'normal',
+		'default'
+	);
+}
+add_action('add_meta_boxes', 'add_slider_meta_box');
+
+// Render the Meta Box HTML
+function render_slider_meta_box($post)
+{
+	wp_nonce_field('slider_meta_box_nonce', 'slider_meta_box_nonce_field');
+
+	$subtext = get_post_meta($post->ID, '_slider_subtext', true);
+	$button_text = get_post_meta($post->ID, '_slider_button_text', true);
+	$button_link = get_post_meta($post->ID, '_slider_button_link', true);
+	$slider_type = get_post_meta($post->ID, '_slider_type', true);
+?>
+	<p>
+		<label>Subtext:</label><br>
+		<input type="text" name="slider_subtext" value="<?php echo esc_attr($subtext); ?>" style="width:100%;" />
+	</p>
+	<p>
+		<label>Button Text:</label><br>
+		<input type="text" name="slider_button_text" value="<?php echo esc_attr($button_text); ?>" style="width:100%;" />
+	</p>
+	<p>
+		<label>Button Link:</label><br>
+		<input type="text" name="slider_button_link" value="<?php echo esc_attr($button_link); ?>" style="width:100%;" />
+	</p>
+	<p>
+		<label>Slider Type / Location:</label><br>
+		<select name="slider_type" style="width:100%;">
+			<option value="">Select a location</option>
+			<option value="home-top" <?php selected($slider_type, 'home-top'); ?>>Home Top</option>
+			<option value="home-middle" <?php selected($slider_type, 'home-middle'); ?>>Home Middle</option>
+			<option value="about-top" <?php selected($slider_type, 'about-top'); ?>>About Top</option>
+			<option value="services-top" <?php selected($slider_type, 'services-top'); ?>>Services Top</option>
+		</select>
+	</p>
+<?php
+}
+
+// Save Meta Box Data
+function save_slider_meta_box($post_id)
+{
+	if (
+		!isset($_POST['slider_meta_box_nonce_field']) ||
+		!wp_verify_nonce($_POST['slider_meta_box_nonce_field'], 'slider_meta_box_nonce')
+	) {
+		return;
+	}
+
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+	if (!current_user_can('edit_post', $post_id)) return;
+
+	if (isset($_POST['slider_subtext'])) {
+		update_post_meta($post_id, '_slider_subtext', sanitize_text_field($_POST['slider_subtext']));
+	}
+
+	if (isset($_POST['slider_button_text'])) {
+		update_post_meta($post_id, '_slider_button_text', sanitize_text_field($_POST['slider_button_text']));
+	}
+
+	if (isset($_POST['slider_button_link'])) {
+		update_post_meta($post_id, '_slider_button_link', esc_url_raw($_POST['slider_button_link']));
+	}
+
+	if (isset($_POST['slider_type'])) {
+		update_post_meta($post_id, '_slider_type', sanitize_text_field($_POST['slider_type']));
+	}
+}
+
+add_action('save_post', 'save_slider_meta_box');

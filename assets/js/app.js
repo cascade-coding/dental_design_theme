@@ -98,3 +98,18 @@ document.addEventListener("click", function (e) {
     toggle_mobile_menu.classList.remove("mobile-menu-open");
   }
 });
+
+// ! sliders
+
+const swiperHomeTop = new Swiper(".swiper-home-top", {
+  loop: true,
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true
+  },
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false
+  },
+  speed: 800, 
+});
