@@ -400,3 +400,151 @@ function save_slider_meta_box($post_id)
 }
 
 add_action('save_post', 'save_slider_meta_box');
+
+
+
+
+// ! Register Custom Post Type: Appointment Request
+function register_appointment_request_post_type()
+{
+	register_post_type('appointment_request', [
+		'labels' => [
+			'name'               => 'Appointment Requests',
+			'singular_name'      => 'Appointment Request',
+			'add_new_item'       => 'Add New Request',
+			'edit_item'          => 'Edit Request',
+			'menu_name'          => 'Appointments',
+		],
+		'public'      => false,
+		'show_ui'     => true,
+		'menu_icon'   => 'dashicons-calendar-alt',
+		'supports'    => []
+	]);
+}
+add_action('init', 'register_appointment_request_post_type');
+
+
+function hide_appointment_title_field() {
+    $screen = get_current_screen();
+    if ($screen->post_type === 'appointment_request') {
+        echo '<style>#titlediv { display: none !important; }</style>';
+    }
+}
+
+function remove_editor_from_appointment_request() {
+    remove_post_type_support('appointment_request', 'editor');
+}
+
+add_action('admin_init', 'remove_editor_from_appointment_request');
+
+add_action('admin_head', 'hide_appointment_title_field');
+
+
+// Add Meta Box to Appointment Request
+function add_appointment_meta_box()
+{
+	add_meta_box(
+		'appointment_details',
+		'Appointment Details',
+		'render_appointment_meta_box',
+		'appointment_request',
+		'normal',
+		'default'
+	);
+}
+add_action('add_meta_boxes', 'add_appointment_meta_box');
+
+// Render the Meta Box UI
+function render_appointment_meta_box($post)
+{
+	wp_nonce_field('appointment_meta_box_nonce', 'appointment_meta_box_nonce_field');
+
+	$full_name = get_post_meta($post->ID, 'full_name', true);
+	$email     = get_post_meta($post->ID, 'email', true);
+	$phone     = get_post_meta($post->ID, 'phone', true);
+?>
+
+	<table class="form-table">
+		<tr>
+			<th><label for="full_name">Full Name</label></th>
+			<td><input type="text" id="full_name" name="full_name" value="<?php echo esc_attr($full_name); ?>" class="regular-text" /></td>
+		</tr>
+		<tr>
+			<th><label for="email">Email</label></th>
+			<td><input type="email" id="email" name="email" value="<?php echo esc_attr($email); ?>" class="regular-text" /></td>
+		</tr>
+		<tr>
+			<th><label for="phone">Phone</label></th>
+			<td><input type="text" id="phone" name="phone" value="<?php echo esc_attr($phone); ?>" class="regular-text" /></td>
+		</tr>
+	</table>
+
+<?php
+}
+
+// Save Meta Box Data
+function save_appointment_meta_box($post_id)
+{
+	if (
+		!isset($_POST['appointment_meta_box_nonce_field']) ||
+		!wp_verify_nonce($_POST['appointment_meta_box_nonce_field'], 'appointment_meta_box_nonce')
+	) {
+		return;
+	}
+
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+	if (get_post_type($post_id) !== 'appointment_request') return;
+
+	if (isset($_POST['full_name'])) {
+		update_post_meta($post_id, 'full_name', sanitize_text_field($_POST['full_name']));
+	}
+
+	if (isset($_POST['email'])) {
+		update_post_meta($post_id, 'email', sanitize_email($_POST['email']));
+	}
+
+	if (isset($_POST['phone'])) {
+		update_post_meta($post_id, 'phone', sanitize_text_field($_POST['phone']));
+	}
+}
+add_action('save_post', 'save_appointment_meta_box');
+
+
+// Handle Frontend Form Submission
+add_action('admin_post_nopriv_submit_appointment_form', 'handle_appointment_form');
+add_action('admin_post_submit_appointment_form', 'handle_appointment_form');
+
+function handle_appointment_form()
+{
+	if (!isset($_POST['appointment_nonce']) || !wp_verify_nonce($_POST['appointment_nonce'], 'appointment_form_nonce')) {
+		wp_die('Security check failed.');
+	}
+
+	$name  = sanitize_text_field($_POST['full_name']);
+	$email = sanitize_email($_POST['email']);
+	$phone = sanitize_text_field($_POST['phone']);
+
+	$post_id = wp_insert_post([
+		'post_type'    => 'appointment_request',
+		'post_title'   => $name . ' - ' . current_time('mysql'),
+		'post_status'  => 'publish',
+	]);
+
+	if ($post_id) {
+		update_post_meta($post_id, 'full_name', $name);
+		update_post_meta($post_id, 'email', $email);
+		update_post_meta($post_id, 'phone', $phone);
+
+		// Optional: Email admin (commented out)
+		/*
+        $to      = get_option('admin_email');
+        $subject = 'New Appointment Request';
+        $message = "Name: $name\nEmail: $email\nPhone: $phone";
+        wp_mail($to, $subject, $message);
+        */
+	}
+
+	wp_redirect(home_url('/thank-you'));
+	exit;
+}
