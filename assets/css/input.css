@@ -180,6 +180,10 @@
   .appointment_field {
     @apply w-full px-3 py-3 bg-primary-50 text-neutral-900 outline-0 border-2 border-transparent focus:border-accent-500 placeholder:text-neutral-900;
   }
+
+  .appointment_popup_show {
+    @apply !pointer-events-auto !opacity-100;
+  }
 }
 
 body {

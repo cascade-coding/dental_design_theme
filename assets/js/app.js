@@ -99,17 +99,38 @@ document.addEventListener("click", function (e) {
   }
 });
 
+// ! popups
+
+const appointment_trigger_btn = document.querySelector(
+  ".appointment-trigger-btn"
+);
+const appointment_popup = document.querySelector(".appointment-popup");
+
+appointment_trigger_btn.addEventListener("click", () => {
+  appointment_popup.classList.add("appointment_popup_show");
+});
+
+document.addEventListener("click", function (e) {
+  const appointment_popup_form = document
+    .getElementById("appointment_popup_form")
+    .contains(e.target);
+
+  if (!appointment_popup_form && !appointment_trigger_btn.contains(e.target)) {
+    appointment_popup.classList.remove("appointment_popup_show");
+  }
+});
+
 // ! sliders
 
 const swiperHomeTop = new Swiper(".swiper-home-top", {
   loop: true,
-  effect: 'fade',
+  effect: "fade",
   fadeEffect: {
-    crossFade: true
+    crossFade: true,
   },
   autoplay: {
     delay: 4000,
-    disableOnInteraction: false
+    disableOnInteraction: false,
   },
-  speed: 800, 
+  speed: 800,
 });

@@ -132,6 +132,11 @@ get_header();
 </nav>
 
 
+<div class="appointment-popup w-full h-full fixed top-0 z-10 bg-primary-950/80 opacity-0 pointer-events-none flex flex-col items-center justify-center">
+    <div class="w-[95%] sm:w-[380px]" id="appointment_popup_form">
+        <?php get_template_part('template-parts/appointment-form'); ?>
+    </div>
+</div>
 
 
 <!-- Swiper -->
@@ -139,24 +144,29 @@ get_header();
     <div class="swiper-wrapper relative">
         <div class="swiper-slide relative">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-1.jpeg" alt="" srcset="">
-            <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16">
+            <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16 hidden lg:block">
                 <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</p>
             </div>
         </div>
         <div class="swiper-slide relative">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-2.jpg" alt="" srcset="">
-            <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16">
+            <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16 hidden lg:block">
                 <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Give you and your family <br>
                     the best personalized dental experience!</p>
             </div>
-
-            
         </div>
 
-        <div class="absolute z-50 w-[380px] top-10 right-16">
-            <?php get_template_part('template-parts/appointment-form'); ?>
-        </div>
+        <div class="absolute w-full h-full z-50 top-0">
+            <div class="absolute top-10 right-16 w-[380px] hidden lg:block">
+                <?php get_template_part('template-parts/appointment-form'); ?>
+            </div>
 
+            <div class="absolute top-0 w-full h-full lg:hidden block">
+                <div class="w-full mb-10 flex justify-center items-center absolute bottom-0">
+                    <button type="button" class="appointment-trigger-btn w-[280px] rounded-full px-4 py-3 bg-accent-500 hover:bg-accent-400 transition-all font-primary text-lg font-medium text-neutral-900 cursor-pointer mt-4">Make an Appointment</button>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
