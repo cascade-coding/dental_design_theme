@@ -132,51 +132,16 @@ get_header();
 </nav>
 
 
-<div class="appointment-popup w-full h-full fixed top-0 z-10 bg-primary-950/80 opacity-0 pointer-events-none flex flex-col items-center justify-center">
+
+
+
+<!-- top hero slider -->
+
+<div class="appointment-popup w-full h-full fixed top-0 z-10 bg-primary-950/95 opacity-0 pointer-events-none flex flex-col items-center justify-center">
     <div class="w-[95%] sm:w-[380px]" id="appointment_popup_form">
         <?php get_template_part('template-parts/appointment-form'); ?>
     </div>
 </div>
-
-
-<!-- Swiper -->
-<div class="swiper swiper-home-top bg-accent-500 !h-[600px]">
-    <div class="swiper-wrapper relative">
-        <div class="swiper-slide relative">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-1.jpeg" alt="" srcset="">
-            <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16 hidden lg:block">
-                <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</p>
-            </div>
-        </div>
-        <div class="swiper-slide relative">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-2.jpg" alt="" srcset="">
-            <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16 hidden lg:block">
-                <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Give you and your family <br>
-                    the best personalized dental experience!</p>
-            </div>
-        </div>
-
-        <div class="absolute w-full h-full z-50 top-0">
-            <div class="absolute top-10 right-16 w-[380px] hidden lg:block">
-                <?php get_template_part('template-parts/appointment-form'); ?>
-            </div>
-
-            <div class="absolute top-0 w-full h-full lg:hidden block">
-                <div class="w-full mb-10 flex justify-center items-center absolute bottom-0">
-                    <button type="button" class="appointment-trigger-btn w-[280px] rounded-full px-4 py-3 bg-accent-500 hover:bg-accent-400 transition-all font-primary text-lg font-medium text-neutral-900 cursor-pointer mt-4">Make an Appointment</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-
-<br>
-<br>
-<br>
-
 
 
 <?php
@@ -184,24 +149,129 @@ $args = array(
     'post_type' => 'slider',
     'meta_key' => '_slider_type',
     'meta_value' => 'home-top',
-    'posts_per_page' => -1, // get all sliders with that type
-    'orderby' => 'menu_order', // optional, if you want to order them
+    'posts_per_page' => -1,
+    'orderby' => 'menu_order',
     'order' => 'ASC',
 );
 
 $slider_query = new WP_Query($args);
 
-if ($slider_query->have_posts()) {
-    while ($slider_query->have_posts()) {
-        $slider_query->the_post();
-
-        $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
-        $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
-        $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
-        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-        $title = get_the_title();
+if ($slider_query->have_posts()) :
 
 ?>
+
+
+    <!-- Swiper -->
+    <div class="swiper swiper-home-top bg-accent-500 !h-[600px]">
+        <div class="swiper-wrapper relative">
+
+            <?php
+
+            while ($slider_query->have_posts()) {
+
+                $slider_query->the_post();
+
+                $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
+                $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
+                $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
+                $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                $title = get_the_title();
+
+                if (!$image_url) {
+                    break;
+                }
+
+            ?>
+
+
+
+                <div class="swiper-slide relative">
+                    <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
+                    <?php if ($subtext): ?>
+                        <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16 hidden lg:block">
+                            <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900"><?php echo esc_html($subtext); ?></p>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+
+            <?php
+                wp_reset_postdata();
+            }
+
+
+            ?>
+
+            <div class="absolute w-full h-full z-50 top-0">
+                <div class="absolute top-10 right-16 w-[380px] hidden lg:block">
+                    <?php get_template_part('template-parts/appointment-form'); ?>
+                </div>
+
+                <div class="absolute top-0 w-full h-full lg:hidden block">
+                    <div class="w-full mb-10 flex justify-center items-center absolute bottom-0">
+                        <button type="button" class="appointment-trigger-btn w-[280px] rounded-full px-4 py-3 bg-accent-500 hover:bg-accent-400 transition-all font-primary text-lg font-medium text-neutral-900 cursor-pointer mt-4">Make an Appointment</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<?php
+
+else : ?>
+
+
+    <!-- Swiper -->
+    <div class="swiper swiper-home-top bg-accent-500 !h-[600px]">
+        <div class="swiper-wrapper relative">
+            <div class="swiper-slide relative">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-1.jpeg" alt="" srcset="">
+                <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16 hidden lg:block">
+                    <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</p>
+                </div>
+            </div>
+            <div class="swiper-slide relative">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-2.jpg" alt="" srcset="">
+                <div class="absolute bottom-0 right-16 min-h-36 bg-primary-100/50 py-4 px-6 pr-16 hidden lg:block">
+                    <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Give you and your family <br>
+                        the best personalized dental experience!</p>
+                </div>
+            </div>
+
+            <div class="absolute w-full h-full z-50 top-0">
+                <div class="absolute top-10 right-16 w-[380px] hidden lg:block">
+                    <?php get_template_part('template-parts/appointment-form'); ?>
+                </div>
+
+                <div class="absolute top-0 w-full h-full lg:hidden block">
+                    <div class="w-full mb-10 flex justify-center items-center absolute bottom-0">
+                        <button type="button" class="appointment-trigger-btn w-[280px] rounded-full px-4 py-3 bg-accent-500 hover:bg-accent-400 transition-all font-primary text-lg font-medium text-neutral-900 cursor-pointer mt-4">Make an Appointment</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+<?php
+endif;
+
+?>
+
+
+
+
+<?php
+get_footer();
+?>
+
+
+
+
+
+<!-- 
         <div class="slider-item">
             <?php if ($image_url): ?>
                 <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>">
@@ -211,27 +281,10 @@ if ($slider_query->have_posts()) {
                 <h2><?php echo esc_html($title); ?></h2>
             <?php endif; ?>
 
-            <?php if ($subtext): ?>
-                <p><?php echo esc_html($subtext); ?></p>
-            <?php endif; ?>
-
+          
             <?php if ($button_text && $button_link): ?>
                 <a href="<?php echo esc_url($button_link); ?>" class="slider-button">
                     <?php echo esc_html($button_text); ?>
                 </a>
             <?php endif; ?>
-        </div>
-<?php
-    }
-    wp_reset_postdata();
-} else {
-    echo '<p>No sliders found for this section.</p>';
-}
-?>
-
-
-
-
-<?php
-get_footer();
-?>
+        </div> -->
