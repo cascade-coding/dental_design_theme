@@ -189,11 +189,17 @@ get_header();
                     <div class="swiper-slide relative">
                         <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
                         <?php if ($subtext): ?>
-                            <div class="absolute bottom-0 right-10 min-h-36 bg-primary-100/50 py-4 px-6 pr-10 hidden lg:block">
-                                <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900"><?php echo esc_html($subtext); ?></p>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 container bottom-0 right-4 min-h-36 hidden lg:block ">
+                                <div class="absolute right-4 bg-primary-100/50 py-4 px-6 pr-10 w-xl">
+                                    <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900"><?php echo esc_html($subtext); ?></p>
+                                </div>
                             </div>
                         <?php endif; ?>
                     </div>
+
+
+
+
 
 
                 <?php
@@ -203,8 +209,9 @@ get_header();
 
                 ?>
 
-                <div class="absolute w-full h-full z-50 top-0">
-                    <div class="absolute top-10 right-10 w-[380px] hidden lg:block">
+
+                <div class="absolute left-1/2 transform -translate-x-1/2 container h-full z-50 top-0">
+                    <div class="absolute top-10 right-4 w-[380px] hidden lg:block">
                         <?php get_template_part('template-parts/appointment-form'); ?>
                     </div>
 
@@ -227,20 +234,24 @@ get_header();
             <div class="swiper-wrapper relative">
                 <div class="swiper-slide relative">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-1.jpeg" alt="" srcset="">
-                    <div class="absolute bottom-0 right-10 min-h-36 bg-primary-100/50 py-4 px-6 pr-10 hidden lg:block ">
-                        <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</p>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 container bottom-0 right-4 min-h-36 hidden lg:block ">
+                        <div class="absolute right-4 bg-primary-100/50 py-4 px-6 pr-10 w-xl">
+                            <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="swiper-slide relative">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-2.jpg" alt="" srcset="">
-                    <div class="absolute bottom-0 right-10 min-h-36 bg-primary-100/50 py-4 px-6 pr-10 hidden lg:block ">
-                        <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Give you and your family <br>
-                            the best personalized dental experience!</p>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 container bottom-0 right-4 min-h-36 hidden lg:block ">
+                        <div class="absolute right-4 bg-primary-100/50 py-4 px-6 pr-10 w-xl">
+                            <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Give you and your family <br>
+                                the best personalized dental experience!</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="absolute w-full h-full z-50 top-0">
-                    <div class="absolute top-10 right-10 w-[380px] hidden lg:block">
+                <div class="absolute left-1/2 transform -translate-x-1/2 container h-full z-50 top-0">
+                    <div class="absolute top-10 right-4 w-[380px] hidden lg:block">
                         <?php get_template_part('template-parts/appointment-form'); ?>
                     </div>
 
@@ -263,7 +274,7 @@ get_header();
 
 </section>
 
-<section class="container mx-auto px-4 lg:px-10 py-10">
+<section class="container mx-auto px-4 py-10">
 
     <div class="flex items-center justify-between gap-x-6">
         <div class="w-full lg:w-1/2">
