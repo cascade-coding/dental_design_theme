@@ -222,7 +222,7 @@ if (defined('JETPACK__VERSION')) {
 // add phone number customizer option
 
 
-function dental_design_customize_register_x($wp_customize)
+function dental_design_customize_register_contact_info_1($wp_customize)
 {
 	$wp_customize->add_section('dental_design_contact_section', array(
 		'title'    => __('Contact Info', 'dental_design'),
@@ -274,8 +274,90 @@ function dental_design_customize_register_x($wp_customize)
 		));
 	}
 }
-add_action('customize_register', 'dental_design_customize_register_x');
 
+add_action('customize_register', 'dental_design_customize_register_contact_info_1');
+
+
+
+
+// add video intro block customizer option
+function dental_design_customize_register_video_intro_section($wp_customize)
+{
+	$wp_customize->add_section('dental_design_video_intro_section', array(
+		'title'       => __('Introduction', 'dental_design'),
+		'priority'    => 30,
+		'description' => __('Upload a video file or enter an external video URL. If both are set, the uploaded file will be used.', 'dental_design'),
+	));
+
+	// Intro Title
+	$wp_customize->add_setting('dental_design_intro_title', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('dental_design_intro_title', array(
+		'label'    => __('Intro Title', 'dental_design'),
+		'section'  => 'dental_design_video_intro_section',
+		'settings' => 'dental_design_intro_title',
+		'type'     => 'text',
+	));
+
+	// Intro Detail
+	$wp_customize->add_setting('dental_design_intro_detail', array(
+		'default'           => '',
+		'sanitize_callback' => 'wp_kses_post',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('dental_design_intro_detail', array(
+		'label'    => __('Intro Detail', 'dental_design'),
+		'section'  => 'dental_design_video_intro_section',
+		'settings' => 'dental_design_intro_detail',
+		'type'     => 'textarea',
+	));
+
+
+	// Intro Video URL
+	$wp_customize->add_setting('dental_design_intro_video_url', array(
+		'default'           => '',
+		'sanitize_callback' => 'esc_url_raw',
+	));
+
+	$wp_customize->add_control('dental_design_intro_video_url', array(
+		'label'       => __('Intro Video URL', 'dental_design'),
+		'description' => __('Paste a YouTube, Vimeo, or direct video URL here. Ignored if a video file is uploaded above.', 'dental_design'),
+		'section'     => 'dental_design_video_intro_section',
+		'settings'    => 'dental_design_intro_video_url',
+		'type'        => 'url',
+	));
+
+	// Selective refresh for title and detail
+	if (isset($wp_customize->selective_refresh)) {
+		$wp_customize->selective_refresh->add_partial('dental_design_intro_title', array(
+			'selector'        => '.vid-intro-title',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_intro_title', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_intro_detail', array(
+			'selector'        => '.vid-intro-detail',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_intro_detail', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_intro_video_url', array(
+			'selector'        => '.vid-intro-video',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_intro_video_url', ''));
+			},
+		));
+	}
+}
+
+add_action('customize_register', 'dental_design_customize_register_video_intro_section');
 
 
 
@@ -424,15 +506,17 @@ function register_appointment_request_post_type()
 add_action('init', 'register_appointment_request_post_type');
 
 
-function hide_appointment_title_field() {
-    $screen = get_current_screen();
-    if ($screen->post_type === 'appointment_request') {
-        echo '<style>#titlediv { display: none !important; }</style>';
-    }
+function hide_appointment_title_field()
+{
+	$screen = get_current_screen();
+	if ($screen->post_type === 'appointment_request') {
+		echo '<style>#titlediv { display: none !important; }</style>';
+	}
 }
 
-function remove_editor_from_appointment_request() {
-    remove_post_type_support('appointment_request', 'editor');
+function remove_editor_from_appointment_request()
+{
+	remove_post_type_support('appointment_request', 'editor');
 }
 
 add_action('admin_init', 'remove_editor_from_appointment_request');

@@ -276,27 +276,59 @@ get_header();
 
 <section class="container mx-auto px-4 py-10">
 
-    <div class="flex items-center justify-between gap-x-6">
+    <div class="flex items-center justify-between gap-x-6 flex-col-reverse lg:flex-row gap-y-6">
         <div class="w-full lg:w-1/2">
 
-            <h2 class="font-primary text-3xl font-semibold leading-relaxed tracking-wide">Welcome to Dental Design</h2>
-            <p class="leading-relaxed mt-4">
-                At Dental Design, we’re dedicated to delivering exceptional dental care to families across the New York area, serving patients of all ages. Our comprehensive services are tailored to meet each patient's unique oral health needs. We believe in the power of listening, taking the time to understand your individual goals, concerns, and lifestyle, so we can offer personalized solutions that enhance your health and transform your smile into something radiant.
-                <br>
-                <br>
-                Located at 850 Madison Ave, Suite 205, New York, NY 10021, we’re now accepting new patients. Schedule your appointment today by calling 212-548-3261.
+            <h2 class="font-primary text-3xl font-semibold leading-relaxed tracking-wide vid-intro-title">
+                <?php if (get_theme_mod('dental_design_intro_title')) : ?>
+                    <?php echo esc_html(get_theme_mod('dental_design_intro_title')); ?>
+                <?php else : ?>
+                    Welcome to Dental Design
+                <?php endif; ?>
+            </h2>
+
+
+
+            <p class="leading-relaxed mt-4 vid-intro-detail">
+
+                <?php if (get_theme_mod('dental_design_intro_detail')) : ?>
+                    <?php echo wp_kses_post(get_theme_mod('dental_design_intro_detail')); ?>
+                <?php else : ?>
+
+                    At Dental Design, we’re dedicated to delivering exceptional dental care to families across the New York area, serving patients of all ages. Our comprehensive services are tailored to meet each patient's unique oral health needs. We believe in the power of listening, taking the time to understand your individual goals, concerns, and lifestyle, so we can offer personalized solutions that enhance your health and transform your smile into something radiant.
+                    <br>
+                    <br>
+                    Located at 850 Madison Ave, Suite 205, New York, NY 10021, we’re now accepting new patients. Schedule your appointment today by calling 212-548-3261.
+                <?php endif; ?>
+
             </p>
+
+
         </div>
 
-        <div class="w-full lg:w-1/2">
-            <video controls class="w-full h-auto">
-                <source src="<?php echo get_template_directory_uri(); ?>/assets/videos/intro_video.mp4" type="video/mp4">
+        <?php
+        $video_url  = get_theme_mod('dental_design_intro_video_url');
+        ?>
+
+        <div class="w-full lg:w-1/2 vid-intro-video">
+            <?php
+            if (!empty($video_url)) {
+                // External video (e.g., YouTube embed link)
+                echo '<iframe class="w-full h-[300px] md:h-[400px] 2xl:h-[440px]"  src="' . esc_url($video_url) . '" frameborder="0" allowfullscreen></iframe>';
+            } else {
+                // Fallback default video
+                echo '<video controls class="w-full h-auto">
+                <source src="' . esc_url(get_template_directory_uri() . '/assets/videos/intro_video.mp4') . '" type="video/mp4">
                 Your browser does not support the video tag.
-            </video>
+              </video>';
+            }
+            ?>
         </div>
+
     </div>
 
 </section>
+
 
 
 
