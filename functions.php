@@ -318,6 +318,22 @@ function dental_design_customize_register_video_intro_section($wp_customize)
 	));
 
 
+	// Intro Video File Upload
+	$wp_customize->add_setting('dental_design_intro_video_file', array(
+		'default' => '',
+		'transport' => 'refresh',
+		'sanitize_callback' => 'absint',
+		'type' => 'theme_mod',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'dental_design_intro_video_file', array(
+		'label'       => __('Upload Intro Video', 'dental_design'),
+		'description' => __('Upload an intro video file (MP4, WebM, etc.). This will override the video URL if set.', 'dental_design'),
+		'section'     => 'dental_design_video_intro_section',
+		'mime_type'   => 'video',
+		'settings'    => 'dental_design_intro_video_file',
+	)));
+
 	// Intro Video URL
 	$wp_customize->add_setting('dental_design_intro_video_url', array(
 		'default'           => '',

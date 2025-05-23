@@ -306,23 +306,37 @@ get_header();
 
         </div>
 
-        <?php
-        $video_url  = get_theme_mod('dental_design_intro_video_url');
-        ?>
 
         <div class="w-full lg:w-1/2 vid-intro-video">
             <?php
-            if (!empty($video_url)) {
-                // External video (e.g., YouTube embed link)
+
+            $video_file_id = get_theme_mod('dental_design_intro_video_file');
+            $video_url  = get_theme_mod('dental_design_intro_video_url');
+
+            if ($video_file_id) {
+                $video_src = wp_get_attachment_url($video_file_id);
+
+                echo '<video controls class="w-full h-auto">
+                <source src="' . esc_url($video_src) . '" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>';
+            } elseif ($video_url) {
+                // You can embed YouTube/Vimeo or direct URL fallback here
                 echo '<iframe class="w-full h-[300px] md:h-[400px] 2xl:h-[440px]"  src="' . esc_url($video_url) . '" frameborder="0" allowfullscreen></iframe>';
             } else {
-                // Fallback default video
                 echo '<video controls class="w-full h-auto">
                 <source src="' . esc_url(get_template_directory_uri() . '/assets/videos/intro_video.mp4') . '" type="video/mp4">
                 Your browser does not support the video tag.
               </video>';
             }
+
             ?>
+
+
+
+
+
+
         </div>
 
     </div>
