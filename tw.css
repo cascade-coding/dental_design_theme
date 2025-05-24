@@ -7,18 +7,18 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-500: oklch(63.7% 0.237 25.331);
-    --color-red-700: oklch(50.5% 0.213 27.518);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-700: oklch(37.3% 0.034 259.733);
     --color-neutral-50: oklch(98.5% 0 0);
     --color-neutral-100: oklch(97% 0 0);
+    --color-neutral-200: oklch(92.2% 0 0);
     --color-neutral-300: oklch(87% 0 0);
     --color-neutral-400: oklch(70.8% 0 0);
     --color-neutral-600: oklch(43.9% 0 0);
     --color-neutral-900: oklch(20.5% 0 0);
     --color-neutral-950: oklch(14.5% 0 0);
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --container-xl: 36rem;
@@ -45,12 +45,12 @@
     --default-mono-font-family: var(--font-mono);
     --color-primary-50: #f0fdfa;
     --color-primary-100: #cdfaf1;
+    --color-primary-400: #2fd2bd;
     --color-primary-600: #0f9287;
     --color-primary-900: #144d49;
     --color-primary-950: #053332;
     --color-secondary-500: #ff5342;
     --color-secondary-600: #ed2815;
-    --color-secondary-700: #c81e0d;
     --color-accent-300: #ffe97f;
     --color-accent-400: #ffe359;
     --color-accent-500: #ffd700;
@@ -238,6 +238,9 @@
   .-inset-0\.5 {
     inset: calc(var(--spacing) * -0.5);
   }
+  .inset-0 {
+    inset: calc(var(--spacing) * 0);
+  }
   .inset-y-0 {
     inset-block: calc(var(--spacing) * 0);
   }
@@ -250,9 +253,6 @@
   .top-1\/2 {
     top: calc(1/2 * 100%);
   }
-  .top-4 {
-    top: calc(var(--spacing) * 4);
-  }
   .top-10 {
     top: calc(var(--spacing) * 10);
   }
@@ -264,12 +264,6 @@
   }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
-  }
-  .bottom-14 {
-    bottom: calc(var(--spacing) * 14);
-  }
-  .bottom-72 {
-    bottom: calc(var(--spacing) * 72);
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
@@ -373,9 +367,6 @@
   }
   .min-h-36 {
     min-height: calc(var(--spacing) * 36);
-  }
-  .min-h-48 {
-    min-height: calc(var(--spacing) * 48);
   }
   .min-h-\[90px\] {
     min-height: 90px;
@@ -497,14 +488,11 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .bg-accent-300 {
-    background-color: var(--color-accent-300);
-  }
-  .bg-accent-400 {
-    background-color: var(--color-accent-400);
-  }
   .bg-accent-500 {
     background-color: var(--color-accent-500);
+  }
+  .bg-black {
+    background-color: var(--color-black);
   }
   .bg-blue-600 {
     background-color: var(--color-blue-600);
@@ -529,12 +517,6 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-primary-950) 95%, transparent);
     }
-  }
-  .bg-red-500 {
-    background-color: var(--color-red-500);
-  }
-  .bg-red-700 {
-    background-color: var(--color-red-700);
   }
   .bg-secondary-500 {
     background-color: var(--color-secondary-500);
@@ -575,14 +557,14 @@
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
   }
-  .py-5 {
-    padding-block: calc(var(--spacing) * 5);
-  }
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
   }
   .pt-3 {
     padding-top: calc(var(--spacing) * 3);
+  }
+  .pt-6 {
+    padding-top: calc(var(--spacing) * 6);
   }
   .pr-2 {
     padding-right: calc(var(--spacing) * 2);
@@ -659,6 +641,12 @@
   .text-neutral-100 {
     color: var(--color-neutral-100);
   }
+  .text-neutral-200 {
+    color: var(--color-neutral-200);
+  }
+  .text-neutral-400 {
+    color: var(--color-neutral-400);
+  }
   .text-neutral-900 {
     color: var(--color-neutral-900);
   }
@@ -668,14 +656,17 @@
   .\!no-underline {
     text-decoration-line: none !important;
   }
-  .no-underline {
-    text-decoration-line: none;
-  }
   .underline {
     text-decoration-line: underline;
   }
   .opacity-0 {
     opacity: 0%;
+  }
+  .opacity-15 {
+    opacity: 15%;
+  }
+  .opacity-40 {
+    opacity: 40%;
   }
   .outline {
     outline-style: var(--tw-outline-style);
@@ -721,13 +712,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-secondary-600);
-      }
-    }
-  }
-  .hover\:bg-secondary-700 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-secondary-700);
       }
     }
   }
@@ -1169,6 +1153,9 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.swiper-pagination .swiper-pagination-bullet {
+  background-color: var(--color-primary-400) !important;
 }
 @property --tw-translate-x {
   syntax: "*";

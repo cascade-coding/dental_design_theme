@@ -210,3 +210,6 @@ body {
   object-fit: cover;
 }
 
+.swiper-pagination .swiper-pagination-bullet {
+  background-color: var(--color-primary-400) !important;
+}
