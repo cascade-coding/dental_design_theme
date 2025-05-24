@@ -134,3 +134,20 @@ const swiperHomeTop = new Swiper(".swiper-home-top", {
   },
   speed: 800,
 });
+
+const swiperHomeMiddle = new Swiper(".swiper-home-middle", {
+  loop: true,
+  effect: "fade",
+  fadeEffect: {
+    crossFade: true,
+  },
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false,
+  },
+  speed: 800,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+});

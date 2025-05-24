@@ -274,9 +274,10 @@ get_header();
 
 </section>
 
+<!-- intro section -->
 <section class="container mx-auto px-4 py-10">
 
-    <div class="flex items-center justify-between gap-x-6 flex-col-reverse lg:flex-row gap-y-6">
+    <div class="flex items-start justify-between gap-x-6 flex-col-reverse lg:flex-row gap-y-6">
         <div class="w-full lg:w-1/2">
 
             <h2 class="font-primary text-3xl font-semibold leading-relaxed tracking-wide vid-intro-title">
@@ -333,15 +334,54 @@ get_header();
             ?>
 
 
-
-
-
-
         </div>
 
     </div>
 
 </section>
+
+
+<!-- offer section -->
+
+<section>
+    <div>
+
+
+
+        <!-- Swiper -->
+        <div class="swiper swiper-home-middle bg-accent-500 !h-[492px] w-full relative">
+            <div class="swiper-wrapper relative">
+
+                <!-- <div class="swiper-slide relative">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-middle-1.jpg" alt="" srcset="">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 container bottom-0 right-4 min-h-36 hidden lg:block ">
+                        <div class="absolute right-4 bg-primary-100/50 py-4 px-6 pr-10 w-xl">
+                            <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</p>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="swiper-slide relative">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-middle-2.jpg" alt="" srcset="">
+                    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 container min-h-36">
+                        <div class="flex items-center justify-center flex-col h-full">
+                            <h3 class="text-4xl font-primary font-bold text-neutral-50 tracking-wide leading-relaxed">Gentle Dentistry & Personalized Care.</h3>
+                            <p class="text-neutral-50 font-semibold mt-2.5">Our private dental office can give you and your family <br> the personalized experience you deserve!</p>
+                            <a href="#" class="!no-underline bg-secondary-500 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-secondary-600 transition-all">Read More About Family Dentistry</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination Dots -->
+            <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
+        </div>
+
+
+    </div>
+</section>
+
 
 
 
