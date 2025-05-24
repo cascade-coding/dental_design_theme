@@ -220,8 +220,6 @@ if (defined('JETPACK__VERSION')) {
 // ! customizer settings
 
 // add phone number customizer option
-
-
 function dental_design_customize_register_contact_info_1($wp_customize)
 {
 	$wp_customize->add_section('dental_design_contact_section', array(
@@ -260,7 +258,7 @@ function dental_design_customize_register_contact_info_1($wp_customize)
 	// Selective refresh partials (for pencil icon)
 	if (isset($wp_customize->selective_refresh)) {
 		$wp_customize->selective_refresh->add_partial('dental_design_phone_number', array(
-			'selector'        => '.phone-number', // target this in your HTML
+			'selector'        => '.phone-number',
 			'render_callback' => function () {
 				return esc_html(get_theme_mod('dental_design_phone_number', ''));
 			},
@@ -375,6 +373,124 @@ function dental_design_customize_register_video_intro_section($wp_customize)
 
 add_action('customize_register', 'dental_design_customize_register_video_intro_section');
 
+
+
+// add our team section info customizer option
+function dental_design_customize_register_our_team_info($wp_customize)
+{
+	$wp_customize->add_section('dental_design_our_team_section', array(
+		'title'    => __('Our Team Info', 'dental_design'),
+		'priority' => 30,
+	));
+
+	// Section Title
+	$wp_customize->add_setting('dental_design_our_team_title', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('dental_design_our_team_title', array(
+		'label'    => __('Title', 'dental_design'),
+		'section'  => 'dental_design_our_team_section',
+		'settings' => 'dental_design_our_team_title',
+		'type'     => 'text',
+	));
+
+
+	// Section text
+	$wp_customize->add_setting('dental_design_our_team_text', array(
+		'default'           => '',
+		'sanitize_callback' => 'wp_kses_post',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('dental_design_our_team_text', array(
+		'label'    => __('Text', 'dental_design'),
+		'section'  => 'dental_design_our_team_section',
+		'settings' => 'dental_design_our_team_text',
+		'type'     => 'textarea',
+	));
+
+	// Section about URL
+	$wp_customize->add_setting('dental_design_our_team_about_url', array(
+		'default'           => '',
+		'sanitize_callback' => 'esc_url_raw',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('dental_design_our_team_about_url', array(
+		'label'    => __('About Us URL', 'dental_design'),
+		'section'  => 'dental_design_our_team_section',
+		'settings' => 'dental_design_our_team_about_url',
+		'type'     => 'text',
+	));
+
+	// Section about button text
+	$wp_customize->add_setting('dental_design_our_team_about_button_text', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('dental_design_our_team_about_button_text', array(
+		'label'    => __('About Us Button Text', 'dental_design'),
+		'section'  => 'dental_design_our_team_section',
+		'settings' => 'dental_design_our_team_about_button_text',
+		'type'     => 'text',
+	));
+
+
+	// Section Team Photo
+	$wp_customize->add_setting('dental_design_our_team_photo', array(
+		'default'           => '',
+		'transport'         => 'refresh',
+		'sanitize_callback' => 'absint',
+		'type'              => 'theme_mod',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'dental_design_our_team_photo', array(
+		'label'       => __('Upload About Section Image', 'dental_design'),
+		'description' => __('Upload a photo of the team.', 'dental_design'),
+		'section'     => 'dental_design_our_team_section',
+		'mime_type'   => 'image',
+		'settings'    => 'dental_design_our_team_photo',
+	)));
+
+
+	// Selective refresh partials (for pencil icon)
+	if (isset($wp_customize->selective_refresh)) {
+		$wp_customize->selective_refresh->add_partial('dental_design_our_team_title', array(
+			'selector'        => '.our-team-title',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_our_team_title', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_our_team_text', array(
+			'selector'        => '.our-team-text',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_our_team_text', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_our_team_about_button_text', array(
+			'selector'        => '.our-team-about-button-text',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_our_team_about_button_text', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_our_team_photo', array(
+			'selector'        => '.our-team-photo',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_our_team_photo', ''));
+			},
+		));
+	}
+}
+
+add_action('customize_register', 'dental_design_customize_register_our_team_info');
 
 
 

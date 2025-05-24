@@ -494,25 +494,57 @@ get_header();
 <section class="container mx-auto px-4 py-10">
     <div class="flex items-start justify-between gap-x-6 flex-col lg:flex-row gap-y-6">
         <div class="w-full lg:w-1/2">
-            <h3 class="font-primary text-3xl font-semibold">Our Team</h3>
-            <p class="mt-6">
-                <b>
-                    Dr. Chase Hughes, DDS, and the team at Dental Design are committed to providing top-quality dental care in New York. We take a comprehensive approach to oral health, combining expert treatment with patient education to promote lasting wellness.
-                </b>
-                <br>
-                <br>
-                From the moment you walk through our doors, our friendly and attentive staff ensure a comfortable, stress-free experience. We believe in building genuine relationships with our patients, listening to their concerns, and delivering personalized care at every step—whether scheduling an appointment, completing paperwork, undergoing an exam, or receiving treatment.
-                <br>
-                <br>
-                Our team stays at the forefront of advanced dental techniques, allowing us to offer the latest innovations in dentistry. At Dental Design, your health, comfort, and confidence in your smile are our top priorities.
+            <h3 class="font-primary text-3xl font-semibold our-team-title">
+
+                <?php if (get_theme_mod('dental_design_our_team_title')) : ?>
+                    <?php echo esc_html(get_theme_mod('dental_design_our_team_title')); ?>
+                <?php else : ?>
+                    Our Team
+                <?php endif; ?>
+
+            </h3>
+
+            <p class="mt-6 our-team-text">
+
+
+                <?php if (get_theme_mod('dental_design_our_team_text')) : ?>
+                    <?php echo esc_html(get_theme_mod('dental_design_our_team_text')); ?>
+                <?php else : ?>
+
+                    <b>
+                        Dr. Chase Hughes, DDS, and the team at Dental Design are committed to providing top-quality dental care in New York. We take a comprehensive approach to oral health, combining expert treatment with patient education to promote lasting wellness.
+                    </b>
+                    <br>
+                    <br>
+                    From the moment you walk through our doors, our friendly and attentive staff ensure a comfortable, stress-free experience. We believe in building genuine relationships with our patients, listening to their concerns, and delivering personalized care at every step—whether scheduling an appointment, completing paperwork, undergoing an exam, or receiving treatment.
+                    <br>
+                    <br>
+                    Our team stays at the forefront of advanced dental techniques, allowing us to offer the latest innovations in dentistry. At Dental Design, your health, comfort, and confidence in your smile are our top priorities.
+
+                <?php endif; ?>
+
+
             </p>
 
+            <?php
+            $about_url = get_theme_mod('dental_design_our_team_about_url');
+            $about_button_text = get_theme_mod('dental_design_our_team_about_button_text');
+            ?>
+
             <div>
-                <a href="#" class="!no-underline bg-primary-800 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-primary-900 transition-all min-w-36 inline-block text-center">Read More About Us</a>
+                <a href="<?php echo $about_url ? esc_url($about_url) : '#'; ?>" class="!no-underline bg-primary-800 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-primary-900 transition-all min-w-36 inline-block text-center our-team-about-button-text">
+                    <?php echo $about_button_text ? esc_html($about_button_text) : 'Read More About Us'; ?>
+                </a>
             </div>
         </div>
-        <div class="w-full lg:w-1/2 self-center">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/our-team.jpg" alt="" srcset="">
+        <div class="w-full lg:w-1/2 self-center our-team-photo">
+            <?php
+            $team_photo_id = get_theme_mod('dental_design_our_team_photo');
+            $team_photo = wp_get_attachment_url($team_photo_id);
+            $final_image = $team_photo ? $team_photo : get_template_directory_uri() . '/assets/images/our-team.jpg';
+            ?>
+            <img src="<?php echo esc_url($final_image); ?>" alt="Team Image" />
+
         </div>
     </div>
 
