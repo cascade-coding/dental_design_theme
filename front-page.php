@@ -490,7 +490,33 @@ get_header();
     </div>
 </section>
 
+<!-- our team section -->
+<section class="container mx-auto px-4 py-10">
+    <div class="flex items-start justify-between gap-x-6 flex-col lg:flex-row gap-y-6">
+        <div class="w-full lg:w-1/2">
+            <h3 class="font-primary text-3xl font-semibold">Our Team</h3>
+            <p class="mt-6">
+                <b>
+                    Dr. Chase Hughes, DDS, and the team at Dental Design are committed to providing top-quality dental care in New York. We take a comprehensive approach to oral health, combining expert treatment with patient education to promote lasting wellness.
+                </b>
+                <br>
+                <br>
+                From the moment you walk through our doors, our friendly and attentive staff ensure a comfortable, stress-free experience. We believe in building genuine relationships with our patients, listening to their concerns, and delivering personalized care at every step—whether scheduling an appointment, completing paperwork, undergoing an exam, or receiving treatment.
+                <br>
+                <br>
+                Our team stays at the forefront of advanced dental techniques, allowing us to offer the latest innovations in dentistry. At Dental Design, your health, comfort, and confidence in your smile are our top priorities.
+            </p>
 
+            <div>
+                <a href="#" class="!no-underline bg-primary-800 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-primary-900 transition-all min-w-36 inline-block text-center">Read More About Us</a>
+            </div>
+        </div>
+        <div class="w-full lg:w-1/2 self-center">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/our-team.jpg" alt="" srcset="">
+        </div>
+    </div>
+
+</section>
 
 
 
