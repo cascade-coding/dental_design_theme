@@ -437,11 +437,16 @@ function render_slider_meta_box($post)
 {
 	wp_nonce_field('slider_meta_box_nonce', 'slider_meta_box_nonce_field');
 
+	$heading = get_post_meta($post->ID, '_slider_heading', true);
 	$subtext = get_post_meta($post->ID, '_slider_subtext', true);
 	$button_text = get_post_meta($post->ID, '_slider_button_text', true);
 	$button_link = get_post_meta($post->ID, '_slider_button_link', true);
 	$slider_type = get_post_meta($post->ID, '_slider_type', true);
 ?>
+	<p>
+		<label>Heading:</label><br>
+		<input type="text" name="slider_heading" value="<?php echo esc_attr($heading); ?>" style="width:100%;" />
+	</p>
 	<p>
 		<label>Subtext:</label><br>
 		<input type="text" name="slider_subtext" value="<?php echo esc_attr($subtext); ?>" style="width:100%;" />
@@ -479,6 +484,10 @@ function save_slider_meta_box($post_id)
 
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 	if (!current_user_can('edit_post', $post_id)) return;
+
+	if (isset($_POST['slider_heading'])) {
+		update_post_meta($post_id, '_slider_heading', sanitize_text_field($_POST['slider_heading']));
+	}
 
 	if (isset($_POST['slider_subtext'])) {
 		update_post_meta($post_id, '_slider_subtext', sanitize_text_field($_POST['slider_subtext']));

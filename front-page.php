@@ -172,6 +172,7 @@ get_header();
 
                     $slider_query->the_post();
 
+                    $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
                     $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
                     $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
                     $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
@@ -188,10 +189,10 @@ get_header();
 
                     <div class="swiper-slide relative">
                         <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
-                        <?php if ($subtext): ?>
+                        <?php if ($heading): ?>
                             <div class="absolute left-1/2 transform -translate-x-1/2 container bottom-0 right-4 min-h-36 hidden lg:block ">
                                 <div class="absolute right-4 bg-primary-100/50 py-4 px-6 pr-10 w-xl">
-                                    <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900"><?php echo esc_html($subtext); ?></p>
+                                    <h3 class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900"><?php echo esc_html($heading); ?></h3>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -236,7 +237,7 @@ get_header();
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-1.jpeg" alt="" srcset="">
                     <div class="absolute left-1/2 transform -translate-x-1/2 container bottom-0 right-4 min-h-36 hidden lg:block ">
                         <div class="absolute right-4 bg-primary-100/50 py-4 px-6 pr-10 w-xl">
-                            <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</p>
+                            <h3 class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Expert Care. Tailored Smiles.</h3>
                         </div>
                     </div>
                 </div>
@@ -244,8 +245,8 @@ get_header();
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-top-2.jpg" alt="" srcset="">
                     <div class="absolute left-1/2 transform -translate-x-1/2 container bottom-0 right-4 min-h-36 hidden lg:block ">
                         <div class="absolute right-4 bg-primary-100/50 py-4 px-6 pr-10 w-xl">
-                            <p class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Give you and your family <br>
-                                the best personalized dental experience!</p>
+                            <h3 class="font-primary text-4xl leading-relaxed tracking-wide font-bold text-left max-w-4xl text-neutral-900">Give you and your family <br>
+                                the best personalized dental experience!</h3>
                         </div>
                     </div>
                 </div>
@@ -357,7 +358,7 @@ get_header();
                     <div class="absolute inset-0 bg-black opacity-40 z-10"></div>
 
                     <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 container min-h-36 z-50">
-                        <div class="flex items-center justify-center flex-col h-full">
+                        <div class="flex items-center justify-center flex-col h-full px-4">
                             <h3 class="text-4xl font-primary font-bold text-neutral-50 tracking-wide leading-relaxed">Your Smile, Reimagined.</h3>
                             <p class="text-neutral-50 font-semibold mt-2.5">Explore cutting-edge cosmetic treatments that bring out the best in your smile.</p>
                             <a href="#" class="!no-underline bg-secondary-500 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-secondary-600 transition-all">Discover Cosmetic Solutions</a>
@@ -370,7 +371,7 @@ get_header();
                     <div class="absolute inset-0 bg-black opacity-40 z-10"></div>
 
                     <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 container min-h-36 z-50">
-                        <div class="flex items-center justify-center flex-col h-full">
+                        <div class="flex items-center justify-center flex-col h-full px-4">
                             <h3 class="text-4xl font-primary font-bold text-neutral-50 tracking-wide leading-relaxed">Gentle Dentistry & Personalized Care.</h3>
                             <p class="text-neutral-50 font-semibold mt-2.5">We use state-of-the-art technology for faster, safer, and more precise care.</p>
                             <a href="#" class="!no-underline bg-secondary-500 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-secondary-600 transition-all">Learn About Our Technology</a>
