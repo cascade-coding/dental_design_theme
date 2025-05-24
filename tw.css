@@ -396,6 +396,15 @@
   .max-w-7xl {
     max-width: var(--container-7xl);
   }
+  .min-w-16 {
+    min-width: calc(var(--spacing) * 16);
+  }
+  .min-w-36 {
+    min-width: calc(var(--spacing) * 36);
+  }
+  .min-w-\[100px\] {
+    min-width: 100px;
+  }
   .flex-1 {
     flex: 1;
   }
@@ -518,9 +527,6 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-primary-950) 95%, transparent);
     }
-  }
-  .bg-red-950 {
-    background-color: var(--color-red-950);
   }
   .bg-secondary-500 {
     background-color: var(--color-secondary-500);
@@ -645,12 +651,6 @@
   .text-neutral-100 {
     color: var(--color-neutral-100);
   }
-  .text-neutral-200 {
-    color: var(--color-neutral-200);
-  }
-  .text-neutral-400 {
-    color: var(--color-neutral-400);
-  }
   .text-neutral-900 {
     color: var(--color-neutral-900);
   }
@@ -665,9 +665,6 @@
   }
   .opacity-0 {
     opacity: 0%;
-  }
-  .opacity-15 {
-    opacity: 15%;
   }
   .opacity-40 {
     opacity: 40%;
