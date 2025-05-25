@@ -554,7 +554,7 @@ get_header();
 <section class="py-10">
     <h3 class="font-primary text-3xl font-semibold tracking-wide leading-relaxed text-center">Some of our Reviews</h3>
 
-    <div class="mt-12">
+    <div class="mt-12 container mx-auto px-4">
 
 
 
@@ -670,30 +670,6 @@ get_header();
 
         else : ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <!-- Swiper -->
             <div class="swiper swiper-home-reviews bg-white min-h-[220px] w-full relative">
                 <div class="swiper-wrapper">
@@ -760,6 +736,21 @@ get_header();
 </section>
 
 
+
+<!-- Location & Contact Information section -->
+<section class="bg-neutral-100 text-neutral-900 mt-4">
+    <div class="container mx-auto px-4 py-10">
+
+        <h3 class="text-3xl font-primary tracking-wide leading-relaxed font-semibold">Location & Contact Information</h3>
+
+        <p class="mt-4">
+            At Dental Design, we’re here to take care of all your dental needs. <br>
+            Need to schedule an appointment or have questions about billing? Call us at (555) 123-4567. <br> <br>
+
+            Prefer us to reach out? Just provide your details, and we’ll be in touch soon to confirm your visit. See you soon!
+        </p>
+    </div>
+</section>
 
 <?php
 get_footer();
