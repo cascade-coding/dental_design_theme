@@ -362,9 +362,9 @@ get_header();
             'order' => 'ASC',
         );
 
-        $slider_query = new WP_Query($args);
+        $offers = new WP_Query($args);
 
-        if ($slider_query->have_posts()) :
+        if ($offers->have_posts()) :
 
         ?>
 
@@ -375,9 +375,9 @@ get_header();
 
                     <?php
 
-                    while ($slider_query->have_posts()) {
+                    while ($offers->have_posts()) {
 
-                        $slider_query->the_post();
+                        $offers->the_post();
 
                         $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
                         $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
@@ -558,67 +558,201 @@ get_header();
 
 
 
-        <!-- Swiper -->
-        <div class="swiper swiper-home-reviews bg-white min-h-[220px] w-full relative">
-            <div class="swiper-wrapper">
+
+
+        <?php
+        $args = array(
+            'post_type' => 'review',
+            'posts_per_page' => -1,
+        );
+
+        $reviews = new WP_Query($args);
+
+        if ($reviews->have_posts()) :
+
+        ?>
+
+
+            <!-- Swiper -->
+            <div class="swiper swiper-home-reviews bg-white min-h-[220px] w-full relative">
+                <div class="swiper-wrapper">
+
+
+                    <?php
+
+                    while ($reviews->have_posts()) {
+
+                        $reviews->the_post();
+
+                        $reviewer_name = get_post_meta(get_the_ID(), '_reviewer_name', true);
+                        $review_stars = get_post_meta(get_the_ID(), '_review_stars', true);
+                        $review_text = get_post_meta(get_the_ID(), '_review_text', true);
+                        $reviewer_photo = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                        $title = get_the_title();
 
 
 
+                        if (!$reviewer_name || !$review_stars || !$review_text) {
+                            continue;
+                        }
 
-                <div class="swiper-slide px-4">
+                    ?>
 
-                    <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
-                        <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
-                            <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-3.jpg" alt="" srcset="">
+
+                        <div class="swiper-slide px-4">
+
+                            <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
+                                <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
+                                    <img class="w-full h-full object-contain object-top" src="<?php echo esc_url($reviewer_photo); ?>" alt="" srcset="">
+                                </div>
+                                <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
+                                    <p class="px-2 pr-4 text-left"><?php echo esc_html($review_text); ?></p>
+                                    <h5 class="text-left font-medium mt-2.5 px-2"><?php echo esc_html($reviewer_name); ?></h5>
+
+                                    <div class="text-left px-1 mt-2">
+                                        <?php
+                                        $stars = intval($review_stars);
+                                        for ($i = 0; $i < 5; $i++) {
+                                            echo $i < $stars ? '⭐' : '☆';
+                                        }
+                                        ?>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
-                            <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
-                            <h5 class="text-left font-medium mt-2.5 px-2">Mark River</h5>
-                            <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
+
+                        <!-- 
+                        <div class="swiper-slide relative">
+                            <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
+
+                            <div class="absolute inset-0 bg-black opacity-40 z-10"></div>
+
+                            <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 container min-h-36 z-50">
+                                <div class="flex items-center justify-center flex-col h-full px-4">
+
+                                    <?php if ($heading): ?>
+                                        <h3 class="text-4xl font-primary font-bold text-neutral-50 tracking-wide leading-relaxed"><?php echo esc_html($heading); ?></h3>
+                                    <?php endif; ?>
+
+                                    <?php if ($subtext): ?>
+                                        <p class="text-neutral-50 font-semibold mt-2.5"><?php echo esc_html($subtext); ?></p>
+                                    <?php endif; ?>
+
+                                    <?php if ($button_text): ?>
+                                        <a href="<?php echo $button_link ? esc_url($button_link) : '#'; ?>" class="!no-underline bg-secondary-500 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-secondary-600 transition-all min-w-36 block"><?php echo esc_html($button_text); ?></a>
+                                    <?php endif; ?>
+
+                                </div>
+                            </div>
+                        </div> -->
+
+
+
+                    <?php
+                        wp_reset_postdata();
+                    }
+
+
+                    ?>
+
+
+
 
                 </div>
 
-                <div class="swiper-slide px-4">
 
-                    <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
-                        <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
-                            <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-3.jpg" alt="" srcset="">
+                <!-- Pagination Dots -->
+                <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
+            </div>
+        <?php
+
+        else : ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Swiper -->
+            <div class="swiper swiper-home-reviews bg-white min-h-[220px] w-full relative">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide px-4">
+
+                        <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
+                            <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
+                                <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-3.jpg" alt="" srcset="">
+                            </div>
+                            <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
+                                <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
+                                <h5 class="text-left font-medium mt-2.5 px-2">Sarah Hughes</h5>
+                                <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
+                            </div>
                         </div>
-                        <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
-                            <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
-                            <h5 class="text-left font-medium mt-2.5 px-2">Mark River</h5>
-                            <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
-                        </div>
+
                     </div>
+
+                    <div class="swiper-slide px-4">
+
+                        <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
+                            <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
+                                <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-4.jpg" alt="" srcset="">
+                            </div>
+                            <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
+                                <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
+                                <h5 class="text-left font-medium mt-2.5 px-2">Tina Robert</h5>
+                                <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="swiper-slide px-4">
+
+                        <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
+                            <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
+                                <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-1.jpg" alt="" srcset="">
+                            </div>
+                            <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
+                                <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
+                                <h5 class="text-left font-medium mt-2.5 px-2">Mark River</h5>
+                                <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
 
                 </div>
 
-                <div class="swiper-slide px-4">
-
-                    <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
-                        <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
-                            <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-3.jpg" alt="" srcset="">
-                        </div>
-                        <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
-                            <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
-                            <h5 class="text-left font-medium mt-2.5 px-2">Mark River</h5>
-                            <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
+                <!-- Pagination Dots -->
+                <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
             </div>
 
-            <!-- Pagination Dots -->
-            <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
-        </div>
 
-
+        <?php endif; ?>
 
 
 

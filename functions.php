@@ -847,7 +847,7 @@ function save_review_meta($post_id)
 		update_post_meta($post_id, '_review_stars', intval($_POST['review_stars']));
 	}
 	if (isset($_POST['review_text'])) {
-		update_post_meta($post_id, '_review_text', esc_url_raw($_POST['review_text']));
+		update_post_meta($post_id, '_review_text', sanitize_text_field($_POST['review_text']));
 	}
 }
 add_action('save_post', 'save_review_meta');
