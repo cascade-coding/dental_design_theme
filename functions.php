@@ -773,3 +773,81 @@ function handle_appointment_form()
 	wp_redirect(home_url('/thank-you'));
 	exit;
 }
+
+
+
+
+
+
+
+// Register Custom Post Type: Reviews
+function register_reviews_post_type()
+{
+	$labels = array(
+		'name' => 'Reviews',
+		'singular_name' => 'Review',
+		'add_new_item' => 'Add New Review',
+		'edit_item' => 'Edit Review',
+		'new_item' => 'New Review',
+		'view_item' => 'View Review',
+		'all_items' => 'All Reviews',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_icon' => 'dashicons-star-filled',
+		'supports' => array('title', 'thumbnail'),
+		'has_archive' => true,
+		'rewrite' => array('slug' => 'reviews'),
+		'show_in_rest' => true,
+	);
+
+	register_post_type('review', $args);
+}
+add_action('init', 'register_reviews_post_type');
+
+
+// Add Meta Box for Reviews
+
+function add_review_meta_boxes()
+{
+	add_meta_box('review_details', 'Review Details', 'render_review_meta_box', 'review', 'normal', 'high');
+}
+
+add_action('add_meta_boxes', 'add_review_meta_boxes');
+
+function render_review_meta_box($post)
+{
+	$reviewer_name = get_post_meta($post->ID, '_reviewer_name', true);
+	$stars = get_post_meta($post->ID, '_review_stars', true);
+	$review_text = get_post_meta($post->ID, '_review_text', true);
+?>
+	<label>Name:</label><br>
+	<input type="text" name="reviewer_name" value="<?php echo esc_attr($reviewer_name); ?>" style="width:100%;" /><br><br>
+
+	<label>Stars (1-5):</label><br>
+	<input type="number" name="review_stars" value="<?php echo esc_attr($stars); ?>" min="1" max="5" /><br><br>
+
+	<label>Review Text:</label><br>
+	<input type="text" name="review_text" value="<?php echo esc_attr($review_text); ?>" style="width:100%;" /><br><br>
+<?php
+}
+
+function save_review_meta($post_id)
+{
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+	if (isset($_POST['reviewer_name'])) {
+		update_post_meta($post_id, '_reviewer_name', sanitize_text_field($_POST['reviewer_name']));
+	}
+	if (isset($_POST['review_stars'])) {
+		update_post_meta($post_id, '_review_stars', intval($_POST['review_stars']));
+	}
+	if (isset($_POST['review_text'])) {
+		update_post_meta($post_id, '_review_text', esc_url_raw($_POST['review_text']));
+	}
+}
+add_action('save_post', 'save_review_meta');

@@ -550,6 +550,81 @@ get_header();
 
 </section>
 
+<!-- our reviews -->
+<section class="py-10">
+    <h3 class="font-primary text-3xl font-semibold tracking-wide leading-relaxed text-center">Some of our Reviews</h3>
+
+    <div class="mt-12">
+
+
+
+        <!-- Swiper -->
+        <div class="swiper swiper-home-reviews bg-white min-h-[220px] w-full relative">
+            <div class="swiper-wrapper">
+
+
+
+
+                <div class="swiper-slide px-4">
+
+                    <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
+                        <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
+                            <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-3.jpg" alt="" srcset="">
+                        </div>
+                        <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
+                            <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
+                            <h5 class="text-left font-medium mt-2.5 px-2">Mark River</h5>
+                            <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="swiper-slide px-4">
+
+                    <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
+                        <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
+                            <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-3.jpg" alt="" srcset="">
+                        </div>
+                        <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
+                            <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
+                            <h5 class="text-left font-medium mt-2.5 px-2">Mark River</h5>
+                            <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="swiper-slide px-4">
+
+                    <div class="flex bg-neutral-50 h-[180px] rounded-2xl">
+                        <div class="w-3/12 h-full overflow-hidden rounded-l-2xl">
+                            <img class="w-full h-full object-contain object-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/review-3.jpg" alt="" srcset="">
+                        </div>
+                        <div class="w-9/12 py-4 overflow-y-auto no-scrollbar">
+                            <p class="px-2 pr-4 text-left">"Such a great experience at Dental Design! The staff was super friendly, and the whole visit was quick and painless. So glad I found this place!"</p>
+                            <h5 class="text-left font-medium mt-2.5 px-2">Mark River</h5>
+                            <div class="text-left px-1 mt-2">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <!-- Pagination Dots -->
+            <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
+        </div>
+
+
+
+
+
+    </div>
+</section>
+
 
 
 <?php

@@ -149,5 +149,30 @@ const swiperHomeMiddle = new Swiper(".swiper-home-middle", {
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
+    dynamicBullets: true,
+  },
+});
+
+const swiperHomeReviews = new Swiper(".swiper-home-reviews", {
+  loop: true,
+  spaceBetween: 30,
+  freeMode: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false,
+  },
+  speed: 800,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+    dynamicBullets: true,
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+    },
+    1024: {
+      slidesPerView: 2,
+    },
   },
 });

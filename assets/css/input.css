@@ -198,7 +198,6 @@ body {
 
 .swiper-slide {
   text-align: center;
-  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -212,4 +211,12 @@ body {
 
 .swiper-pagination .swiper-pagination-bullet {
   background-color: var(--color-primary-400) !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
