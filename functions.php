@@ -214,6 +214,16 @@ if (defined('JETPACK__VERSION')) {
 
 
 
+// start session
+function start_session_for_flash_message()
+{
+	if (!session_id()) {
+		session_start();
+	}
+}
+add_action('init', 'start_session_for_flash_message');
+
+
 
 
 
@@ -851,3 +861,155 @@ function save_review_meta($post_id)
 	}
 }
 add_action('save_post', 'save_review_meta');
+
+
+
+
+
+
+
+
+
+
+
+// Register Custom Post Type: Contact Request
+function register_contact_request_post_type()
+{
+	register_post_type('contact_request', [
+		'labels' => [
+			'name'               => 'Contact Requests',
+			'singular_name'      => 'Contact Request',
+			'add_new_item'       => 'Add New Contact',
+			'edit_item'          => 'Edit Contact',
+			'menu_name'          => 'Contacts',
+		],
+		'public'      => false,
+		'show_ui'     => true,
+		'menu_icon'   => 'dashicons-email-alt2',
+		'supports'    => []
+	]);
+}
+add_action('init', 'register_contact_request_post_type');
+
+function hide_contact_title_field()
+{
+	$screen = get_current_screen();
+	if ($screen->post_type === 'contact_request') {
+		echo '<style>#titlediv { display: none !important; }</style>';
+	}
+}
+add_action('admin_head', 'hide_contact_title_field');
+
+function remove_editor_from_contact_request()
+{
+	remove_post_type_support('contact_request', 'editor');
+}
+add_action('admin_init', 'remove_editor_from_contact_request');
+
+
+function add_contact_meta_box()
+{
+	add_meta_box(
+		'contact_details',
+		'Contact Details',
+		'render_contact_meta_box',
+		'contact_request',
+		'normal',
+		'default'
+	);
+}
+
+add_action('add_meta_boxes', 'add_contact_meta_box');
+
+function render_contact_meta_box($post)
+{
+	wp_nonce_field('contact_meta_box_nonce', 'contact_meta_box_nonce_field');
+
+	$full_name = get_post_meta($post->ID, 'full_name', true);
+	$email     = get_post_meta($post->ID, 'email', true);
+	$phone     = get_post_meta($post->ID, 'phone', true);
+	$message   = get_post_meta($post->ID, 'message', true);
+?>
+	<table class="form-table">
+		<tr>
+			<th><label for="full_name">Full Name</label></th>
+			<td><input type="text" id="full_name" name="full_name" value="<?php echo esc_attr($full_name); ?>" class="regular-text" /></td>
+		</tr>
+		<tr>
+			<th><label for="email">Email</label></th>
+			<td><input type="email" id="email" name="email" value="<?php echo esc_attr($email); ?>" class="regular-text" /></td>
+		</tr>
+		<tr>
+			<th><label for="phone">Phone</label></th>
+			<td><input type="text" id="phone" name="phone" value="<?php echo esc_attr($phone); ?>" class="regular-text" /></td>
+		</tr>
+		<tr>
+			<th><label for="message">Message</label></th>
+			<td><textarea id="message" name="message" rows="5" class="large-text"><?php echo esc_textarea($message); ?></textarea></td>
+		</tr>
+	</table>
+<?php
+}
+
+
+function save_contact_meta_box($post_id)
+{
+	if (
+		!isset($_POST['contact_meta_box_nonce_field']) ||
+		!wp_verify_nonce($_POST['contact_meta_box_nonce_field'], 'contact_meta_box_nonce')
+	) {
+		return;
+	}
+
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+	if (get_post_type($post_id) !== 'contact_request') return;
+
+	update_post_meta($post_id, 'full_name', sanitize_text_field($_POST['full_name'] ?? ''));
+	update_post_meta($post_id, 'email', sanitize_email($_POST['email'] ?? ''));
+	update_post_meta($post_id, 'phone', sanitize_text_field($_POST['phone'] ?? ''));
+	update_post_meta($post_id, 'message', sanitize_textarea_field($_POST['message'] ?? ''));
+}
+add_action('save_post', 'save_contact_meta_box');
+
+
+add_action('admin_post_nopriv_submit_contact_form', 'handle_contact_form');
+add_action('admin_post_submit_contact_form', 'handle_contact_form');
+
+function handle_contact_form()
+{
+	if (!isset($_POST['contact_nonce']) || !wp_verify_nonce($_POST['contact_nonce'], 'contact_form_nonce')) {
+		wp_die('Security check failed.');
+	}
+
+	$name    = sanitize_text_field($_POST['full_name']);
+	$email   = sanitize_email($_POST['email']);
+	$phone   = sanitize_text_field($_POST['phone']);
+	$message = sanitize_textarea_field($_POST['message']);
+
+	$post_id = wp_insert_post([
+		'post_type'   => 'contact_request',
+		'post_title'  => $name . ' - ' . current_time('mysql'),
+		'post_status' => 'publish',
+	]);
+
+	if ($post_id) {
+		update_post_meta($post_id, 'full_name', $name);
+		update_post_meta($post_id, 'email', $email);
+		update_post_meta($post_id, 'phone', $phone);
+		update_post_meta($post_id, 'message', $message);
+
+		// Optional: Send email to admin
+		/*
+		$to      = get_option('admin_email');
+		$subject = 'New Contact Message';
+		$body    = "Name: $name\nEmail: $email\nPhone: $phone\nMessage:\n$message";
+		wp_mail($to, $subject, $body);
+		*/
+	}
+
+	// $_SESSION['flash_message'] = 'Thank you for contacting us.';
+	// $_SESSION['sumbition_type'] = 'contact';
+
+	wp_redirect(home_url('/thank-you'));
+	exit;
+}

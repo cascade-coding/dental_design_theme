@@ -751,9 +751,9 @@ get_header();
 
         <div class="flex items-start justify-between gap-x-10 flex-col lg:flex-row gap-y-6 mt-12">
             <div class="w-full lg:w-1/2">
-                <form method="post" action="" class="bg-neutral-200 w-full p-4">
-                    <!-- <input type="hidden" name="action" value="submit_appointment_form">
-                    <?php wp_nonce_field('appointment_form_nonce', 'appointment_nonce'); ?> -->
+                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="bg-neutral-200 w-full p-4">
+                    <?php wp_nonce_field('contact_form_nonce', 'contact_nonce'); ?>
+                    <input type="hidden" name="action" value="submit_contact_form">
 
                     <div class="flex flex-col gap-y-4">
                         <input type="text" name="full_name" placeholder="Full Name (Required)" required class="contact_field">
