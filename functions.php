@@ -506,7 +506,102 @@ add_action('customize_register', 'dental_design_customize_register_our_team_info
 
 
 
+// add contact section info customizer option
+function dental_design_customize_register_contact_section_info_2($wp_customize)
+{
+	$wp_customize->add_section('dental_design_contact_section_2', array(
+		'title'    => __('Contact Form Section', 'dental_design'),
+		'priority' => 30,
+	));
 
+	// Section Title
+	$wp_customize->add_setting('dental_design_contact_2_title', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('dental_design_contact_2_title', array(
+		'label'    => __('Title', 'dental_design'),
+		'section'  => 'dental_design_contact_section_2',
+		'settings' => 'dental_design_contact_2_title',
+		'type'     => 'text',
+	));
+
+	// Section Subtext
+	$wp_customize->add_setting('dental_design_contact_2_subtext', array(
+		'default'           => '',
+		'sanitize_callback' => 'wp_kses_post',
+		'transport'         => 'postMessage',
+	));
+
+	$wp_customize->add_control('dental_design_contact_2_subtext', array(
+		'label'    => __('Text', 'dental_design'),
+		'section'  => 'dental_design_contact_section_2',
+		'settings' => 'dental_design_contact_2_subtext',
+		'type'     => 'textarea',
+	));
+
+	// Selective refresh partials (for pencil icon)
+	if (isset($wp_customize->selective_refresh)) {
+		$wp_customize->selective_refresh->add_partial('dental_design_contact_2_title', array(
+			'selector'        => '.contact-title',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_contact_2_title', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_contact_2_subtext', array(
+			'selector'        => '.contact-subtext',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_contact_2_subtext', ''));
+			},
+		));
+	}
+}
+
+add_action('customize_register', 'dental_design_customize_register_contact_section_info_2');
+
+
+function dental_design_customize_register_business_hours_section($wp_customize)
+{
+	$days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+	$wp_customize->add_section('dental_design_business_hours_section', [
+		'title'    => __('Business Hours', 'mytheme'),
+		'priority' => 30,
+	]);
+
+	foreach ($days as $day) {
+		$setting_id = "business_hours_{$day}";
+
+		// Register the setting
+		$wp_customize->add_setting($setting_id, [
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport'         => 'postMessage',
+		]);
+
+		// Add the control
+		$wp_customize->add_control($setting_id, [
+			'label'   => __(ucfirst($day), 'mytheme'),
+			'section' => 'dental_design_business_hours_section',
+			'type'    => 'text',
+		]);
+
+		if (isset($wp_customize->selective_refresh)) {
+			$wp_customize->selective_refresh->add_partial($setting_id, [
+				'selector'        => ".edit_business_hours_{$day}",
+				'render_callback' => function () use ($setting_id) {
+					return esc_html(get_theme_mod($setting_id, ''));
+				},
+			]);
+		}
+	}
+}
+
+
+add_action('customize_register', 'dental_design_customize_register_business_hours_section');
 
 
 

@@ -62,10 +62,6 @@ get_header();
                                 <?php endif; ?>
                             </p>
 
-                            <!-- <div class="contact-info">
-                                <span class="phone-number"><?php echo esc_html(get_theme_mod('dental_design_phone_number', '')); ?></span>
-                                <span class="business-address"><?php echo esc_html(get_theme_mod('dental_design_address', '')); ?></span>
-                            </div> -->
 
                         </div>
 
@@ -87,6 +83,7 @@ get_header();
                                         (555) 123-4567
                                     </a>
                                 <?php endif; ?>
+
                             </span>
                         </button>
                     </div>
@@ -740,13 +737,23 @@ get_header();
 <!-- Location & Contact Information section -->
 <section class="bg-neutral-50 text-neutral-900 mt-4">
     <div class="container mx-auto px-4 py-10">
-        <h3 class="text-3xl font-primary tracking-wide leading-relaxed font-semibold">Location & Contact Information</h3>
+        <h3 class="text-3xl font-primary tracking-wide leading-relaxed font-semibold contact-title">
+            <?php if (get_theme_mod('dental_design_contact_2_title')) : ?>
+                <?php echo esc_html(get_theme_mod('dental_design_contact_2_title')); ?>
+            <?php else : ?>
+                Location & Contact Information
+            <?php endif; ?>
+        </h3>
 
-        <p class="mt-4">
-            At Dental Design, we’re here to take care of all your dental needs. <br>
-            Need to schedule an appointment or have questions about billing? Call us at (555) 123-4567. <br> <br>
+        <p class="mt-4 contact-subtext">
+            <?php if (get_theme_mod('dental_design_contact_2_subtext')) : ?>
+                <?php echo esc_html(get_theme_mod('dental_design_contact_2_subtext')); ?>
+            <?php else : ?>
+                At Dental Design, we’re here to take care of all your dental needs. <br>
+                Need to schedule an appointment or have questions about billing? Call us at (555) 123-4567. <br> <br>
 
-            Prefer us to reach out? Just provide your details, and we’ll be in touch soon to confirm your visit. See you soon!
+                Prefer us to reach out? Just provide your details, and we’ll be in touch soon to confirm your visit. See you soon!
+            <?php endif; ?>
         </p>
 
         <div class="flex items-start justify-between gap-x-10 flex-col lg:flex-row gap-y-6 mt-12">
@@ -775,8 +782,15 @@ get_header();
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.58498 6.88502C10.8168 4.65322 13.8437 3.39941 17 3.39941C20.1562 3.39941 23.1832 4.65322 25.415 6.88502C27.6468 9.11682 28.9006 12.1438 28.9006 15.3C28.9006 18.4563 27.6468 21.4832 25.415 23.715L17 32.13L8.58498 23.715C7.47983 22.61 6.60318 21.2981 6.00507 19.8542C5.40696 18.4104 5.09912 16.8629 5.09912 15.3C5.09912 13.7372 5.40696 12.1897 6.00507 10.7458C6.60318 9.30195 7.47983 7.99005 8.58498 6.88502ZM17 18.7C17.9017 18.7 18.7665 18.3418 19.4041 17.7042C20.0418 17.0666 20.4 16.2018 20.4 15.3C20.4 14.3983 20.0418 13.5335 19.4041 12.8959C18.7665 12.2582 17.9017 11.9 17 11.9C16.0982 11.9 15.2334 12.2582 14.5958 12.8959C13.9582 13.5335 13.6 14.3983 13.6 15.3C13.6 16.2018 13.9582 17.0666 14.5958 17.7042C15.2334 18.3418 16.0982 18.7 17 18.7Z" class="fill-neutral-300" />
                     </svg>
 
-                    <span class="inline-block w-6/12">850 Madison Ave, Suite 205,
-                        New York, NY 10021</span>
+                    <span class="inline-block w-6/12 business-address">
+                        <?php if (get_theme_mod('dental_design_address')) : ?>
+                            <?php echo esc_html(get_theme_mod('dental_design_address')); ?>
+                        <?php else : ?>
+                            850 Madison Ave, Suite 205, New York, NY 10021
+                        <?php endif; ?>
+                    </span>
+
+
                 </div>
                 <div class="flex items-center justify-start gap-x-2.5">
                     <svg class="w-7 h-7" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -784,7 +798,20 @@ get_header();
                     </svg>
 
 
-                    <span class="inline-block w-6/12">(555) 123-4567</span>
+                    <span class="inline-block w-6/12">
+
+                        <?php if (get_theme_mod('dental_design_phone_number')) : ?>
+                            <a href="tel:<?php echo esc_attr(get_theme_mod('dental_design_phone_number')); ?>" class="!no-underline phone-number">
+                                <?php echo esc_html(get_theme_mod('dental_design_phone_number')); ?>
+                            </a>
+
+                        <?php else : ?>
+                            <a href="tel:(555) 123-4567" class="!no-underline phone-number">
+                                (555) 123-4567
+                            </a>
+                        <?php endif; ?>
+
+                    </span>
                 </div>
 
                 <div class="flex items-start justify-start gap-x-2.5">
@@ -792,36 +819,81 @@ get_header();
                         <path d="M7.08333 31.1666C6.30417 31.1666 5.63715 30.8892 5.08229 30.3343C4.52743 29.7794 4.25 29.1124 4.25 28.3333V8.49992C4.25 7.72075 4.52743 7.05374 5.08229 6.49888C5.63715 5.94402 6.30417 5.66659 7.08333 5.66659H8.5V2.83325H11.3333V5.66659H22.6667V2.83325H25.5V5.66659H26.9167C27.6958 5.66659 28.3628 5.94402 28.9177 6.49888C29.4726 7.05374 29.75 7.72075 29.75 8.49992V16.5395C29.3014 16.327 28.841 16.1499 28.3687 16.0083C27.8965 15.8666 27.4125 15.7603 26.9167 15.6895V14.1666H7.08333V28.3333H16.0083C16.1736 28.8527 16.3684 29.3485 16.5927 29.8208C16.817 30.293 17.0826 30.7416 17.3896 31.1666H7.08333ZM25.5 32.5833C23.5403 32.5833 21.8698 31.8926 20.4885 30.5114C19.1073 29.1301 18.4167 27.4596 18.4167 25.4999C18.4167 23.5402 19.1073 21.8697 20.4885 20.4885C21.8698 19.1072 23.5403 18.4166 25.5 18.4166C27.4597 18.4166 29.1302 19.1072 30.5115 20.4885C31.8927 21.8697 32.5833 23.5402 32.5833 25.4999C32.5833 27.4596 31.8927 29.1301 30.5115 30.5114C29.1302 31.8926 27.4597 32.5833 25.5 32.5833ZM27.8729 28.8645L28.8646 27.8728L26.2083 25.2166V21.2499H24.7917V25.7833L27.8729 28.8645Z" class="fill-neutral-300" />
                     </svg>
 
-                    <div class="flex flex-col gap-y-4 w-11/12">
+                    <div class="flex flex-col gap-y-4 w-11/12 edit_business_hours">
                         <dl class="flex justify-between items-center w-full">
                             <dt>Monday:</dt>
-                            <dd class="w-8/12 text-left">8:30AM to 5:00PM</dd>
+                            <dd class="w-8/12 text-left edit_business_hours_monday">
+                                <?php if (get_theme_mod('business_hours_monday')) : ?>
+                                    <?php echo esc_html(get_theme_mod('business_hours_monday')); ?>
+                                <?php else : ?>
+                                    8:30AM to 5:00PM
+                                <?php endif; ?>
+                            </dd>
                         </dl>
                         <dl class="flex justify-between items-center w-full">
                             <dt>Tuesday:</dt>
-                            <dd class="w-8/12 text-left">8:30AM to 5:00PM</dd>
+                            <dd class="w-8/12 text-left edit_business_hours_tuesday">
+                                <?php if (get_theme_mod('business_hours_tuesday')) : ?>
+                                    <?php echo esc_html(get_theme_mod('business_hours_tuesday')); ?>
+                                <?php else : ?>
+                                    8:30AM to 5:00PM
+                                <?php endif; ?>
+                            </dd>
                         </dl>
                         <dl class="flex justify-between items-center w-full">
                             <dt>Wednesday:</dt>
-                            <dd class="w-8/12 text-left">8:30AM to 5:00PM</dd>
+                            <dd class="w-8/12 text-left edit_business_hours_wednesday">
+                                <?php if (get_theme_mod('business_hours_wednesday')) : ?>
+                                    <?php echo esc_html(get_theme_mod('business_hours_wednesday')); ?>
+                                <?php else : ?>
+                                    8:30AM to 5:00PM
+                                <?php endif; ?>
+                            </dd>
                         </dl>
                         <dl class="flex justify-between items-center w-full">
                             <dt>Thursday:</dt>
-                            <dd class="w-8/12 text-left">8:30AM to 5:00PM</dd>
+                            <dd class="w-8/12 text-left edit_business_hours_thursday">
+                                <?php if (get_theme_mod('business_hours_thursday')) : ?>
+                                    <?php echo esc_html(get_theme_mod('business_hours_thursday')); ?>
+                                <?php else : ?>
+                                    8:30AM to 5:00PM
+                                <?php endif; ?>
+                            </dd>
+
                         </dl>
                         <dl class="flex justify-between items-center w-full">
                             <dt>Friday:</dt>
-                            <dd class="w-8/12 text-left">8:30AM to 5:00PM</dd>
+                            <dd class="w-8/12 text-left edit_business_hours_friday">
+                                <?php if (get_theme_mod('business_hours_friday')) : ?>
+                                    <?php echo esc_html(get_theme_mod('business_hours_friday')); ?>
+                                <?php else : ?>
+                                    8:30AM to 5:00PM
+                                <?php endif; ?>
+                            </dd>
                         </dl>
                         <dl class="flex justify-between items-center w-full">
                             <dt>Saturday:</dt>
-                            <dd class="w-8/12 text-left">8:30AM to 5:00PM</dd>
+                            <dd class="w-8/12 text-left edit_business_hours_saturday">
+                                <?php if (get_theme_mod('business_hours_saturday')) : ?>
+                                    <?php echo esc_html(get_theme_mod('business_hours_saturday')); ?>
+                                <?php else : ?>
+                                    8:30AM to 5:00PM
+                                <?php endif; ?>
+                            </dd>
                         </dl>
                         <dl class="flex justify-between items-center w-full">
                             <dt>Sunday:</dt>
-                            <dd class="w-8/12 text-left">Closed</dd>
+                            <dd class="w-8/12 text-left edit_business_hours_sunday">
+                                <?php if (get_theme_mod('business_hours_sunday')) : ?>
+                                    <?php echo esc_html(get_theme_mod('business_hours_sunday')); ?>
+                                <?php else : ?>
+                                    Closed
+                                <?php endif; ?>
+                            </dd>
                         </dl>
                     </div>
+
+
                 </div>
 
             </div>
