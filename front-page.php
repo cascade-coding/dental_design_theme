@@ -91,14 +91,25 @@ get_header();
                     <!-- links -->
                     <div class="flex justify-end space-x-4 mt-3 pb-2 !font-primary main-navigation-lg" id="main-navigation">
 
-                        <?php
-                        wp_nav_menu(
-                            array(
-                                'theme_location' => 'menu-1',
-                                'menu_id'        => 'primary-menu',
-                            )
-                        );
-                        ?>
+                        <?php if (has_nav_menu('menu-1')) : ?>
+                            <?php
+                            wp_nav_menu(
+                                array(
+                                    'theme_location' => 'menu-1',
+                                    'menu_id'        => 'primary-menu',
+                                    'fallback_cb'    => false,
+                                )
+                            );
+                            ?>
+                        <?php else : ?>
+                            <div>
+                                <ul id="primary-menu" class="menu">
+                                    <li><a href="#">Home</a></li>
+                                </ul>
+                            </div>
+
+                        <?php endif; ?>
+
 
                     </div>
                 </div>
@@ -114,14 +125,24 @@ get_header();
     <div class="hidden" id="mobile-menu">
         <div class="flex space-x-4 mt-3 pb-2 !font-primary main-navigation-sm" id="main-navigation">
 
-            <?php
-            wp_nav_menu(
-                array(
-                    'theme_location' => 'menu-1',
-                    'menu_id'        => 'primary-menu',
-                )
-            );
-            ?>
+            <?php if (has_nav_menu('menu-1')) : ?>
+                <?php
+                wp_nav_menu(
+                    array(
+                        'theme_location' => 'menu-1',
+                        'menu_id'        => 'primary-menu',
+                        'fallback_cb'    => false,
+                    )
+                );
+                ?>
+            <?php else : ?>
+                <div>
+                    <ul id="primary-menu" class="menu">
+                        <li><a href="#">Home</a></li>
+                    </ul>
+                </div>
+
+            <?php endif; ?>
 
         </div>
     </div>
