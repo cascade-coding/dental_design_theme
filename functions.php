@@ -241,7 +241,7 @@ function dental_design_customize_register_contact_info_1($wp_customize)
 	$wp_customize->add_setting('dental_design_phone_number', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
-		'transport'         => 'postMessage', // for live preview
+		'transport'         => 'refresh', // for live preview
 	));
 
 	$wp_customize->add_control('dental_design_phone_number', array(
@@ -255,7 +255,7 @@ function dental_design_customize_register_contact_info_1($wp_customize)
 	$wp_customize->add_setting('dental_design_address', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_address', array(
@@ -301,7 +301,7 @@ function dental_design_customize_register_video_intro_section($wp_customize)
 	$wp_customize->add_setting('dental_design_intro_title', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_intro_title', array(
@@ -315,7 +315,7 @@ function dental_design_customize_register_video_intro_section($wp_customize)
 	$wp_customize->add_setting('dental_design_intro_detail', array(
 		'default'           => '',
 		'sanitize_callback' => 'wp_kses_post',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_intro_detail', array(
@@ -397,7 +397,7 @@ function dental_design_customize_register_our_team_info($wp_customize)
 	$wp_customize->add_setting('dental_design_our_team_title', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_our_team_title', array(
@@ -412,7 +412,7 @@ function dental_design_customize_register_our_team_info($wp_customize)
 	$wp_customize->add_setting('dental_design_our_team_text', array(
 		'default'           => '',
 		'sanitize_callback' => 'wp_kses_post',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_our_team_text', array(
@@ -426,7 +426,7 @@ function dental_design_customize_register_our_team_info($wp_customize)
 	$wp_customize->add_setting('dental_design_our_team_about_url', array(
 		'default'           => '',
 		'sanitize_callback' => 'esc_url_raw',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_our_team_about_url', array(
@@ -440,7 +440,7 @@ function dental_design_customize_register_our_team_info($wp_customize)
 	$wp_customize->add_setting('dental_design_our_team_about_button_text', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_our_team_about_button_text', array(
@@ -518,7 +518,7 @@ function dental_design_customize_register_contact_section_info_2($wp_customize)
 	$wp_customize->add_setting('dental_design_contact_2_title', array(
 		'default'           => '',
 		'sanitize_callback' => 'sanitize_text_field',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_contact_2_title', array(
@@ -532,7 +532,7 @@ function dental_design_customize_register_contact_section_info_2($wp_customize)
 	$wp_customize->add_setting('dental_design_contact_2_subtext', array(
 		'default'           => '',
 		'sanitize_callback' => 'wp_kses_post',
-		'transport'         => 'postMessage',
+		'transport'         => 'refresh',
 	));
 
 	$wp_customize->add_control('dental_design_contact_2_subtext', array(
@@ -563,12 +563,13 @@ function dental_design_customize_register_contact_section_info_2($wp_customize)
 add_action('customize_register', 'dental_design_customize_register_contact_section_info_2');
 
 
+// add business hours info
 function dental_design_customize_register_business_hours_section($wp_customize)
 {
 	$days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 	$wp_customize->add_section('dental_design_business_hours_section', [
-		'title'    => __('Business Hours', 'mytheme'),
+		'title'    => __('Business Hours', 'dental_design'),
 		'priority' => 30,
 	]);
 
@@ -579,12 +580,12 @@ function dental_design_customize_register_business_hours_section($wp_customize)
 		$wp_customize->add_setting($setting_id, [
 			'default'           => '',
 			'sanitize_callback' => 'sanitize_text_field',
-			'transport'         => 'postMessage',
+			'transport'         => 'refresh',
 		]);
 
 		// Add the control
 		$wp_customize->add_control($setting_id, [
-			'label'   => __(ucfirst($day), 'mytheme'),
+			'label'   => __(ucfirst($day), 'dental_design'),
 			'section' => 'dental_design_business_hours_section',
 			'type'    => 'text',
 		]);
@@ -602,6 +603,56 @@ function dental_design_customize_register_business_hours_section($wp_customize)
 
 
 add_action('customize_register', 'dental_design_customize_register_business_hours_section');
+
+
+
+// add location map link
+function dental_design_customize_register_location_map_link($wp_customize)
+{
+
+	$wp_customize->add_section('dental_design_location_map_link', [
+		'title'    => __('Office Location Map', 'dental_design'),
+		'priority' => 30,
+	]);
+
+
+
+	// Map Link
+	$wp_customize->add_setting('dental_design_location_map_link_text', array(
+		'default'           => '',
+		'sanitize_callback' => 'dental_design_extract_iframe_src',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('dental_design_location_map_link_text', array(
+		'label'    => __('Google Link', 'dental_design'),
+		'section'  => 'dental_design_location_map_link',
+		'description' => __('Paste the Google Maps embed code OR just the embed URL (src).', 'dental_design'),
+		'settings' => 'dental_design_location_map_link_text',
+		'type'     => 'text',
+	));
+
+	function dental_design_extract_iframe_src($input) {
+		if (preg_match('/src="([^"]+)"/', $input, $matches)) {
+			return esc_url_raw($matches[1]);
+		}
+		return esc_url_raw($input); // fallback
+	}
+
+
+	if (isset($wp_customize->selective_refresh)) {
+		$wp_customize->selective_refresh->add_partial('dental_design_location_map_link_text', [
+			'selector'        => ".location_map_link_text",
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_location_map_link_text', ''));
+			},
+		]);
+	}
+	
+}
+
+
+add_action('customize_register', 'dental_design_customize_register_location_map_link');
 
 
 
