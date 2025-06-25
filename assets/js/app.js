@@ -99,85 +99,122 @@ document.addEventListener("click", function (e) {
   }
 });
 
-// ! popups
-
-const appointment_trigger_btn = document.querySelector(
-  ".appointment-trigger-btn"
-);
-const appointment_popup = document.querySelector(".appointment-popup");
-
-appointment_trigger_btn.addEventListener("click", () => {
-  appointment_popup.classList.add("appointment_popup_show");
-});
-
-document.addEventListener("click", function (e) {
-  const appointment_popup_form = document
-    .getElementById("appointment_popup_form")
-    .contains(e.target);
-
-  if (!appointment_popup_form && !appointment_trigger_btn.contains(e.target)) {
-    appointment_popup.classList.remove("appointment_popup_show");
-  }
-});
-
-// ! sliders
-
-const swiperHomeTop = new Swiper(".swiper-home-top", {
-  loop: true,
-  effect: "fade",
-  fadeEffect: {
-    crossFade: true,
-  },
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-  },
-  speed: 800,
-});
-
-const swiperHomeMiddle = new Swiper(".swiper-home-middle", {
-  loop: true,
-  effect: "fade",
-  fadeEffect: {
-    crossFade: true,
-  },
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-  },
-  speed: 800,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-    dynamicBullets: true,
-  },
-});
-
-const swiperHomeReviews = new Swiper(".swiper-home-reviews", {
-  loop: true,
-  spaceBetween: 30,
-  freeMode: true,
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-  },
-  speed: 800,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-    dynamicBullets: true,
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-    },
-    1024: {
-      slidesPerView: 2,
-    },
-  },
-});
-
-
-
 // set year in the footer
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function front_page() {
+  // ! popups
+  const appointment_trigger_btn = document.querySelector(
+    ".appointment-trigger-btn"
+  );
+  const appointment_popup = document.querySelector(".appointment-popup");
+
+  appointment_trigger_btn.addEventListener("click", () => {
+    appointment_popup.classList.add("appointment_popup_show");
+  });
+
+  document.addEventListener("click", function (e) {
+    const appointment_popup_form = document
+      .getElementById("appointment_popup_form")
+      .contains(e.target);
+
+    if (
+      !appointment_popup_form &&
+      !appointment_trigger_btn.contains(e.target)
+    ) {
+      appointment_popup.classList.remove("appointment_popup_show");
+    }
+  });
+
+  // ! sliders
+
+  const swiperHomeTop = new Swiper(".swiper-home-top", {
+    loop: true,
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
+    },
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    speed: 800,
+  });
+
+  const swiperHomeMiddle = new Swiper(".swiper-home-middle", {
+    loop: true,
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
+    },
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    speed: 800,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+  });
+
+  const swiperHomeReviews = new Swiper(".swiper-home-reviews", {
+    loop: true,
+    spaceBetween: 30,
+    freeMode: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    speed: 800,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+      },
+      1024: {
+        slidesPerView: 2,
+      },
+    },
+  });
+}
+
+
+// Code for about us page
+function aboutUs() {
+  const swiperHomeMiddle = new Swiper(".swiper-home-middle", {
+    loop: true,
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
+    },
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    speed: 800,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+  });
+}
+
+// conditionally rendering based on page
+const pageInfo = document.getElementById("page-info");
+
+if (pageInfo && pageInfo.dataset.page === "front-page") {
+  front_page();
+}
+
+if (pageInfo && pageInfo.dataset.page === "about-page") {
+  aboutUs();
+}

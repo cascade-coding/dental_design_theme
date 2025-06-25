@@ -4,6 +4,7 @@ get_header();
 get_template_part('template-parts/top-nav');
 ?>
 
+<div data-page="front-page" id="page-info"></div>
 
 <!-- top hero slider -->
 <section>
@@ -55,8 +56,6 @@ get_template_part('template-parts/top-nav');
 
                     ?>
 
-
-
                     <div class="swiper-slide relative">
                         <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
                         <?php if ($heading): ?>
@@ -72,18 +71,12 @@ get_template_part('template-parts/top-nav');
                         <?php endif; ?>
                     </div>
 
-
-
-
-
-
                     <?php
                     wp_reset_postdata();
                 }
 
 
                 ?>
-
 
                 <div class="absolute left-1/2 transform -translate-x-1/2 container h-full z-50 top-0">
                     <div class="absolute top-10 right-4 w-[380px] hidden lg:block">
@@ -152,8 +145,6 @@ get_template_part('template-parts/top-nav');
             </div>
         </div>
 
-
-
         <?php
     endif;
 
@@ -175,8 +166,6 @@ get_template_part('template-parts/top-nav');
                 <?php endif; ?>
             </h2>
 
-
-
             <p class="leading-relaxed mt-4 vid-intro-detail">
 
                 <?php if (get_theme_mod('dental_design_intro_detail')): ?>
@@ -195,7 +184,6 @@ get_template_part('template-parts/top-nav');
                 <?php endif; ?>
 
             </p>
-
 
         </div>
 
@@ -238,11 +226,6 @@ get_template_part('template-parts/top-nav');
 <section>
     <div class="pt-6">
 
-
-
-
-
-
         <?php
         $args = array(
             'post_type' => 'slider',
@@ -258,7 +241,6 @@ get_template_part('template-parts/top-nav');
         if ($offers->have_posts()):
 
             ?>
-
 
             <!-- Swiper -->
             <div class="swiper swiper-home-middle bg-accent-500 !h-[492px] w-full relative">
@@ -282,11 +264,6 @@ get_template_part('template-parts/top-nav');
                         }
 
                         ?>
-
-
-
-
-
 
                         <div class="swiper-slide relative">
                             <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
@@ -316,8 +293,6 @@ get_template_part('template-parts/top-nav');
                             </div>
                         </div>
 
-
-
                         <?php
                         wp_reset_postdata();
                     }
@@ -325,11 +300,7 @@ get_template_part('template-parts/top-nav');
 
                     ?>
 
-
-
-
                 </div>
-
 
                 <!-- Pagination Dots -->
                 <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
@@ -338,12 +309,9 @@ get_template_part('template-parts/top-nav');
 
         else: ?>
 
-
-
             <!-- Swiper -->
             <div class="swiper swiper-home-middle bg-accent-500 !h-[492px] w-full relative">
                 <div class="swiper-wrapper relative">
-
 
                     <div class="swiper-slide relative">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-middle-1.jpg" alt=""
@@ -388,7 +356,6 @@ get_template_part('template-parts/top-nav');
                 <!-- Pagination Dots -->
                 <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
             </div>
-
 
             <?php
 
@@ -437,7 +404,6 @@ get_template_part('template-parts/top-nav');
 
                 <?php endif; ?>
 
-
             </p>
 
             <?php
@@ -471,10 +437,6 @@ get_template_part('template-parts/top-nav');
 
     <div class="mt-12 container mx-auto px-4">
 
-
-
-
-
         <?php
         $args = array(
             'post_type' => 'review',
@@ -492,7 +454,6 @@ get_template_part('template-parts/top-nav');
             <div class="swiper swiper-home-reviews bg-white min-h-[220px] w-full relative">
                 <div class="swiper-wrapper">
 
-
                     <?php
 
                     while ($reviews->have_posts()) {
@@ -506,13 +467,11 @@ get_template_part('template-parts/top-nav');
                         $title = get_the_title();
 
 
-
                         if (!$reviewer_name || !$review_stars || !$review_text) {
                             continue;
                         }
 
                         ?>
-
 
                         <div class="swiper-slide px-4">
 
@@ -539,42 +498,12 @@ get_template_part('template-parts/top-nav');
 
                         </div>
 
-                        <!-- 
-                        <div class="swiper-slide relative">
-                            <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
-
-                            <div class="absolute inset-0 bg-black opacity-40 z-10"></div>
-
-                            <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 container min-h-36 z-50">
-                                <div class="flex items-center justify-center flex-col h-full px-4">
-
-                                    <?php if ($heading): ?>
-                                        <h3 class="text-4xl font-primary font-bold text-neutral-50 tracking-wide leading-relaxed"><?php echo esc_html($heading); ?></h3>
-                                    <?php endif; ?>
-
-                                    <?php if ($subtext): ?>
-                                        <p class="text-neutral-50 font-semibold mt-2.5"><?php echo esc_html($subtext); ?></p>
-                                    <?php endif; ?>
-
-                                    <?php if ($button_text): ?>
-                                        <a href="<?php echo $button_link ? esc_url($button_link) : '#'; ?>" class="!no-underline bg-secondary-500 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-secondary-600 transition-all min-w-36 block"><?php echo esc_html($button_text); ?></a>
-                                    <?php endif; ?>
-
-                                </div>
-                            </div>
-                        </div> -->
-
-
-
                         <?php
                         wp_reset_postdata();
                     }
 
 
                     ?>
-
-
-
 
                 </div>
 
@@ -647,8 +576,6 @@ get_template_part('template-parts/top-nav');
 
                     </div>
 
-
-
                 </div>
 
                 <!-- Pagination Dots -->
@@ -657,7 +584,6 @@ get_template_part('template-parts/top-nav');
 
 
         <?php endif; ?>
-
 
 
     </div>
