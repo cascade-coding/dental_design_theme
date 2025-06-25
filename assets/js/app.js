@@ -176,3 +176,8 @@ const swiperHomeReviews = new Swiper(".swiper-home-reviews", {
     },
   },
 });
+
+
+
+// set year in the footer
+document.getElementById("year").textContent = new Date().getFullYear();
