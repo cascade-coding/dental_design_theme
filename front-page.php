@@ -928,9 +928,9 @@ get_header();
                     </svg>
 
                     <div class="flex flex-col gap-y-4 w-11/12 edit_business_hours">
-                        <dl class="flex justify-between items-center w-full">
-                            <dt>Monday:</dt>
-                            <dd class="w-8/12 text-left edit_business_hours_monday">
+                        <dl class="flex flex-col gap-y-2 sm:flex-row justify-between items-center w-full">
+                            <dt class="w-full sm:w-auto">Monday:</dt>
+                            <dd class="w-full sm:w-8/12 text-left edit_business_hours_monday">
                                 <?php if (get_theme_mod('business_hours_monday')): ?>
                                     <?php echo esc_html(get_theme_mod('business_hours_monday')); ?>
                                 <?php else: ?>
@@ -938,9 +938,9 @@ get_header();
                                 <?php endif; ?>
                             </dd>
                         </dl>
-                        <dl class="flex justify-between items-center w-full">
-                            <dt>Tuesday:</dt>
-                            <dd class="w-8/12 text-left edit_business_hours_tuesday">
+                        <dl class="flex flex-col gap-y-2 sm:flex-row justify-between items-center w-full">                            
+                            <dt class="w-full sm:w-auto">Tuesday:</dt>
+                            <dd class="w-full sm:w-8/12 text-left edit_business_hours_tuesday">
                                 <?php if (get_theme_mod('business_hours_tuesday')): ?>
                                     <?php echo esc_html(get_theme_mod('business_hours_tuesday')); ?>
                                 <?php else: ?>
@@ -948,9 +948,9 @@ get_header();
                                 <?php endif; ?>
                             </dd>
                         </dl>
-                        <dl class="flex justify-between items-center w-full">
-                            <dt>Wednesday:</dt>
-                            <dd class="w-8/12 text-left edit_business_hours_wednesday">
+                        <dl class="flex flex-col gap-y-2 sm:flex-row justify-between items-center w-full">                            
+                            <dt class="w-full sm:w-auto">Wednesday:</dt>
+                            <dd class="w-full sm:w-8/12 text-left edit_business_hours_wednesday">
                                 <?php if (get_theme_mod('business_hours_wednesday')): ?>
                                     <?php echo esc_html(get_theme_mod('business_hours_wednesday')); ?>
                                 <?php else: ?>
@@ -958,9 +958,9 @@ get_header();
                                 <?php endif; ?>
                             </dd>
                         </dl>
-                        <dl class="flex justify-between items-center w-full">
-                            <dt>Thursday:</dt>
-                            <dd class="w-8/12 text-left edit_business_hours_thursday">
+                        <dl class="flex flex-col gap-y-2 sm:flex-row justify-between items-center w-full">                            
+                            <dt class="w-full sm:w-auto">Thursday:</dt>
+                            <dd class="w-full sm:w-8/12 text-left edit_business_hours_thursday">
                                 <?php if (get_theme_mod('business_hours_thursday')): ?>
                                     <?php echo esc_html(get_theme_mod('business_hours_thursday')); ?>
                                 <?php else: ?>
@@ -969,9 +969,9 @@ get_header();
                             </dd>
 
                         </dl>
-                        <dl class="flex justify-between items-center w-full">
-                            <dt>Friday:</dt>
-                            <dd class="w-8/12 text-left edit_business_hours_friday">
+                        <dl class="flex flex-col gap-y-2 sm:flex-row justify-between items-center w-full">                            
+                            <dt class="w-full sm:w-auto">Friday:</dt>
+                            <dd class="w-full sm:w-8/12 text-left edit_business_hours_friday">
                                 <?php if (get_theme_mod('business_hours_friday')): ?>
                                     <?php echo esc_html(get_theme_mod('business_hours_friday')); ?>
                                 <?php else: ?>
@@ -979,9 +979,9 @@ get_header();
                                 <?php endif; ?>
                             </dd>
                         </dl>
-                        <dl class="flex justify-between items-center w-full">
-                            <dt>Saturday:</dt>
-                            <dd class="w-8/12 text-left edit_business_hours_saturday">
+                        <dl class="flex flex-col gap-y-2 sm:flex-row justify-between items-center w-full">                            
+                            <dt class="w-full sm:w-auto">Saturday:</dt>
+                            <dd class="w-full sm:w-8/12 text-left edit_business_hours_saturday">
                                 <?php if (get_theme_mod('business_hours_saturday')): ?>
                                     <?php echo esc_html(get_theme_mod('business_hours_saturday')); ?>
                                 <?php else: ?>
@@ -989,9 +989,9 @@ get_header();
                                 <?php endif; ?>
                             </dd>
                         </dl>
-                        <dl class="flex justify-between items-center w-full">
-                            <dt>Sunday:</dt>
-                            <dd class="w-8/12 text-left edit_business_hours_sunday">
+                        <dl class="flex flex-col gap-y-2 sm:flex-row justify-between items-center w-full">                            
+                            <dt class="w-full sm:w-auto">Sunday:</dt>
+                            <dd class="w-full sm:w-8/12 text-left edit_business_hours_sunday">
                                 <?php if (get_theme_mod('business_hours_sunday')): ?>
                                     <?php echo esc_html(get_theme_mod('business_hours_sunday')); ?>
                                 <?php else: ?>
