@@ -385,6 +385,104 @@ add_action('customize_register', 'dental_design_customize_register_video_intro_s
 
 
 
+
+// add video intro block customizer option for about page
+function dental_design_customize_register_about_video_intro_section($wp_customize)
+{
+	$wp_customize->add_section('dental_design_about_video_intro_section', array(
+		'title'       => __('About Introduction', 'dental_design'),
+		'priority'    => 30,
+		'description' => __('Upload a video file or enter an external video URL. If both are set, the uploaded file will be used.', 'dental_design'),
+	));
+
+	// Intro Title
+	$wp_customize->add_setting('dental_design_about_intro_title', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('dental_design_about_intro_title', array(
+		'label'    => __('Intro Title', 'dental_design'),
+		'section'  => 'dental_design_about_video_intro_section',
+		'settings' => 'dental_design_about_intro_title',
+		'type'     => 'text',
+	));
+
+	// Intro Detail
+	$wp_customize->add_setting('dental_design_about_intro_detail', array(
+		'default'           => '',
+		'sanitize_callback' => 'wp_kses_post',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control('dental_design_about_intro_detail', array(
+		'label'    => __('Intro Detail', 'dental_design'),
+		'section'  => 'dental_design_about_video_intro_section',
+		'settings' => 'dental_design_about_intro_detail',
+		'type'     => 'textarea',
+	));
+
+
+	// Intro Video File Upload
+	$wp_customize->add_setting('dental_design_about_intro_video_file', array(
+		'default' => '',
+		'transport' => 'refresh',
+		'sanitize_callback' => 'absint',
+		'type' => 'theme_mod',
+	));
+
+	$wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'dental_design_about_intro_video_file', array(
+		'label'       => __('Upload Intro Video', 'dental_design'),
+		'description' => __('Upload an intro video file (MP4, WebM, etc.). This will override the video URL if set.', 'dental_design'),
+		'section'     => 'dental_design_about_video_intro_section',
+		'mime_type'   => 'video',
+		'settings'    => 'dental_design_about_intro_video_file',
+	)));
+
+	// Intro Video URL
+	$wp_customize->add_setting('dental_design_about_intro_video_url', array(
+		'default'           => '',
+		'sanitize_callback' => 'esc_url_raw',
+	));
+
+	$wp_customize->add_control('dental_design_about_intro_video_url', array(
+		'label'       => __('Intro Video URL', 'dental_design'),
+		'description' => __('Paste a YouTube, Vimeo, or direct video URL here. Ignored if a video file is uploaded above.', 'dental_design'),
+		'section'     => 'dental_design_about_video_intro_section',
+		'settings'    => 'dental_design_about_intro_video_url',
+		'type'        => 'url',
+	));
+
+	// Selective refresh for title and detail
+	if (isset($wp_customize->selective_refresh)) {
+		$wp_customize->selective_refresh->add_partial('dental_design_about_intro_title', array(
+			'selector'        => '.about-vid-intro-title',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_about_intro_title', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_about_intro_detail', array(
+			'selector'        => '.about-vid-intro-detail',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_about_intro_detail', ''));
+			},
+		));
+
+		$wp_customize->selective_refresh->add_partial('dental_design_about_intro_video_url', array(
+			'selector'        => '.about-vid-intro-video',
+			'render_callback' => function () {
+				return esc_html(get_theme_mod('dental_design_about_intro_video_url', ''));
+			},
+		));
+	}
+}
+
+add_action('customize_register', 'dental_design_customize_register_about_video_intro_section');
+
+
+
 // add our team section info customizer option
 function dental_design_customize_register_our_team_info($wp_customize)
 {
