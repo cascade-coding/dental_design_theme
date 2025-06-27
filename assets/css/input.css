@@ -219,10 +219,23 @@ body {
   background-color: var(--color-primary-400) !important;
 }
 
+
+/* scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+
+/* sections */
+.doctor-section > .card:nth-child(even){
+  background-color: var(--color-primary-800);
+}
+
+.doctor-section > .card:nth-child(even) > div{
+  flex-direction: row-reverse !important;
 }

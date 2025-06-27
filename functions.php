@@ -880,6 +880,40 @@ add_action('save_post', 'save_slider_meta_box');
 
 
 
+// Register Custom Post Type: Doctors
+function register_doctors_post_type()
+{
+	$labels = array(
+		'name' => 'Doctors',
+		'singular_name' => 'Doctor',
+		'menu_name' => 'Doctors',
+		'add_new' => 'Add New Doctor',
+		'add_new_item' => 'Add New Doctor',
+		'edit_item' => 'Edit Doctor',
+		'new_item' => 'New Doctor',
+		'view_item' => 'View Doctor',
+		'search_items' => 'Search Doctors',
+		'not_found' => 'No doctors found.',
+		'not_found_in_trash' => 'No doctors found in Trash.',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => false,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 20,
+		'menu_icon' => 'dashicons-id',
+		'supports' => array('title', 'editor', 'thumbnail'),
+		'show_in_rest' => true,
+	);
+
+	register_post_type('doctor', $args);
+}
+add_action('init', 'register_doctors_post_type');
+
+
+
 
 // ! Register Custom Post Type: Appointment Request
 function register_appointment_request_post_type()

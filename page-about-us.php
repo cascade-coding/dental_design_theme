@@ -200,6 +200,124 @@ get_template_part('template-parts/top-nav');
 
 
 
+<!-- doctors -->
+<section class="py-10 doctor-section">
+
+
+
+
+<?php
+
+$args = array(
+	'post_type'      => 'doctor',
+	'posts_per_page' => 3,
+	'post_status'    => 'publish',
+);
+
+$doctors = new WP_Query($args);
+
+if ($doctors->have_posts()) : ?>
+	<div class="doctors-wrapper">
+		<?php while ($doctors->have_posts()) : $doctors->the_post(); ?>
+			<div class="doctor">
+				<?php if (has_post_thumbnail()) : ?>
+					<div class="doctor-image">
+						<?php the_post_thumbnail('medium'); ?>
+					</div>
+				<?php endif; ?>
+
+				<h3 class="doctor-name"><?php the_title(); ?></h3>
+
+				<div class="doctor-details">
+					<?php the_content(); ?>
+				</div>
+			</div>
+		<?php endwhile; ?>
+	</div>
+	<?php wp_reset_postdata(); ?>
+<?php else : ?>
+
+    <div class="bg-primary-900 card">
+
+        <div class="container mx-auto px-4 py-10 flex items-center lg:items-start justify-between gap-8 flex-col lg:flex-row">
+            <div class="w-full lg:w-1/4 flex items-center justify-center lg:justify-start">
+                <img class="w-full max-w-[280px] lg:max-w-full h-auto" src="<?php echo get_template_directory_uri(); ?>/assets/images/doctor-1.png" alt="" />
+            </div>
+           
+            <div class="text-neutral-50 w-full lg:w-3/4">
+                <h3 class="font-primary text-2xl font-semibold">Dr. Nathan Caldwell, DMD</h3>
+                <p class="mt-4">
+                    Dr. Nathan Caldwell is a dedicated and meticulous dental professional with a deep passion for helping patients achieve healthy, confident smiles. With a reputation for his gentle approach and precise craftsmanship, Dr. Caldwell is especially known for his ability to calm even the most anxious patients, ensuring they feel comfortable every step of the way. His warm demeanor, paired with his keen attention to detail, makes him a trusted choice for individuals seeking expert dental care.
+                    <br> <br>
+                    A graduate of the University of Pennsylvania School of Dental Medicine, Dr. Caldwell pursued advanced training at the Boston VA Healthcare System, where he gained extensive experience treating veterans with complex dental and medical conditions. His expertise spans a wide range of specialties, including cosmetic and restorative dentistry, dental implantology, and full-mouth rehabilitation. His technical skills, combined with an artist’s eye for aesthetics, allow him to create stunning, natural-looking smiles tailored to each patient’s needs.
+                    <br>
+                    <br>
+                    Dr. Caldwell is also a firm believer in giving back to the community. He actively participates in outreach programs that provide dental care to underserved populations, both locally and internationally. He has volunteered on multiple medical mission trips, offering his skills to those who lack access to quality dental care. Additionally, he mentors aspiring dental students, guiding them toward successful careers in dentistry.
+                    <br>
+                    <br>
+                    When he’s not perfecting smiles, Dr. Caldwell enjoys outdoor adventures, whether it's hiking in the mountains, exploring new travel destinations, or capturing breathtaking landscapes through his passion for photography. He’s also a self-proclaimed coffee connoisseur who’s always on the hunt for the perfect espresso.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bg-primary-900 card">
+
+        <div class="container mx-auto px-4 py-10 flex items-center lg:items-start justify-between gap-8 flex-col lg:flex-row">
+            <div class="w-full lg:w-1/4 flex items-center justify-center lg:justify-start">
+                <img class="w-full max-w-[280px] lg:max-w-full h-auto" src="<?php echo get_template_directory_uri(); ?>/assets/images/doctor-2.png" alt="" />
+            </div>
+           
+            <div class="text-neutral-50 w-full lg:w-3/4">
+                <h3 class="font-primary text-2xl font-semibold">Dr. Evelyn Harper, DDS</h3>
+                <p class="mt-4">
+                    Dr. Evelyn Harper is a skilled and compassionate dentist dedicated to providing top-tier care with a personalized touch. Raised in the charming city of Charleston, South Carolina, she developed an early appreciation for precision and artistry—qualities that now define her approach to dentistry. Her philosophy revolves around patient education, transparency, and ensuring each individual feels at ease in the dental chair.
+                    Dr. Harper earned her Doctorate of Dental Surgery (DDS) from the University of Michigan, graduating with honors and receiving recognition from the Omicron Kappa Upsilon National Dental Honor Society. She further honed her expertise during her residency at the Johns Hopkins Hospital, where she served as chief resident. There, she gained extensive experience in complex restorations, cosmetic dentistry, and treating patients with dental anxiety. Whether performing full-mouth rehabilitations or simple routine care, she blends technical precision with a gentle touch to create lasting, healthy smiles.
+                    <br>
+                    <br>
+                    Passionate about service, Dr. Harper actively participates in community outreach programs, offering dental care to underserved populations. She has volunteered on medical missions abroad and frequently donates her time to local initiatives that provide free dental services to children and seniors in need.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bg-primary-900 card">
+
+        <div class="container mx-auto px-4 py-10 flex items-center lg:items-start justify-between gap-8 flex-col lg:flex-row">
+            <div class="w-full lg:w-1/4 flex items-center justify-center lg:justify-start">
+                <img class="w-full max-w-[280px] lg:max-w-full h-auto" src="<?php echo get_template_directory_uri(); ?>/assets/images/doctor-3.png" alt="" />
+            </div>
+           
+            <div class="text-neutral-50 w-full lg:w-3/4">
+                <h3 class="font-primary text-2xl font-semibold">Dr. Thomas Wexler, DDS</h3>
+                <p class="mt-4">
+                    With decades of hands-on experience, Dr. Thomas Wexler has built a career on precision, innovation, and patient-first care. A graduate of the New York University College of Dentistry, he refined his expertise during an advanced residency at Mount Sinai Hospital, focusing on restorative and cosmetic procedures. His practice is rooted in a deep commitment to evolving with the latest technology while maintaining a warm, approachable presence that puts patients at ease.
+                    <br>
+                    <br>
+                    Dr. Wexler’s journey in dentistry spans over 40 years, during which he has cultivated a reputation for meticulous attention to detail and a sharp eye for aesthetic dentistry. He thrives on problem-solving complex dental cases, blending science and artistry to create natural, functional smiles. Patients appreciate his honest, straightforward approach—he believes in educating rather than just treating, empowering individuals to take charge of their oral health.
+                    <br>
+                    <br>
+                    Beyond the dental chair, Dr. Wexler is always on the move. Whether it's sailing along the East Coast, refining his golf swing, or capturing breathtaking landscapes through his camera lens, he approaches life with the same precision and enthusiasm that he brings to his practice. A longtime resident of Westchester, he enjoys weekend road trips, experimenting with new cuisines, and spending time with his growing family.
+                    This version leans into a refined yet modern style, making Dr. Wexler feel distinct and engaging while maintaining a professional edge. Let me know if you want a different spin!
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+</section>
 
 
 
