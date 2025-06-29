@@ -219,19 +219,33 @@ $doctors = new WP_Query($args);
 if ($doctors->have_posts()) : ?>
 	<div class="doctors-wrapper">
 		<?php while ($doctors->have_posts()) : $doctors->the_post(); ?>
-			<div class="doctor">
-				<?php if (has_post_thumbnail()) : ?>
-					<div class="doctor-image">
-						<?php the_post_thumbnail('medium'); ?>
-					</div>
-				<?php endif; ?>
 
-				<h3 class="doctor-name"><?php the_title(); ?></h3>
+            <div class="bg-primary-900 card">
 
-				<div class="doctor-details">
-					<?php the_content(); ?>
-				</div>
-			</div>
+                <div class="container mx-auto px-4 py-10 flex items-center lg:items-start justify-between gap-8 flex-col lg:flex-row">
+                    <div class="w-full lg:w-1/4 flex items-center justify-center lg:justify-start">
+                        <?php 
+                            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                            if ($image_url) : 
+                            
+                            ?>
+                            <div class="doctor-image">
+                                <img class="w-full max-w-[280px] lg:max-w-full h-auto" src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                
+                    <div class="text-neutral-50 w-full lg:w-3/4">
+                        <h3 class="font-primary text-2xl font-semibold"><?php the_title(); ?></h3>
+                        <div class="mt-4">
+                            <?php the_content(); ?>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+			
 		<?php endwhile; ?>
 	</div>
 	<?php wp_reset_postdata(); ?>
