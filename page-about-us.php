@@ -29,7 +29,7 @@ get_template_part('template-parts/top-nav');
             ?>
 
             <!-- Swiper -->
-            <div class="swiper swiper-home-middle bg-accent-500 !h-[492px] w-full relative">
+            <div class="swiper swiper-about-top bg-accent-500 !h-[492px] w-full relative">
                 <div class="swiper-wrapper relative">
 
                     <?php
@@ -105,17 +105,17 @@ get_template_part('template-parts/top-nav');
         else: ?>
 
             <!-- Swiper -->
-            <div class="swiper swiper-home-middle bg-accent-500 !h-[492px] w-full relative">
+            <div class="swiper swiper-about-top bg-accent-500 !h-[492px] w-full relative">
                 <div class="swiper-wrapper relative">
 
 
                     <div class="swiper-slide relative">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-middle-1.jpg" alt=""
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-top-1.jpg" alt=""
                             srcset="">
                     </div>
 
                     <div class="swiper-slide relative">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-slider-middle-2.jpg" alt=""
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/our-team.jpg" alt=""
                             srcset="">
                     </div>
 

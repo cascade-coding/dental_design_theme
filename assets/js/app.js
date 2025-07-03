@@ -189,7 +189,28 @@ function front_page() {
 
 // Code for about us page
 function aboutUs() {
-  const swiperHomeMiddle = new Swiper(".swiper-home-middle", {
+  const swiperAboutTop = new Swiper(".swiper-about-top", {
+    loop: true,
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
+    },
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    speed: 800,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+  });
+}
+
+// Code for services page
+function servicesPage() {
+  const swiperServicesTop = new Swiper(".swiper-services-top", {
     loop: true,
     effect: "fade",
     fadeEffect: {
@@ -217,4 +238,8 @@ if (pageInfo && pageInfo.dataset.page === "front-page") {
 
 if (pageInfo && pageInfo.dataset.page === "about-page") {
   aboutUs();
+}
+
+if (pageInfo && pageInfo.dataset.page === "services-page") {
+  servicesPage();
 }
