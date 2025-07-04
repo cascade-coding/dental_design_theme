@@ -1291,3 +1291,28 @@ function handle_contact_form()
 	wp_redirect(home_url('/thank-you'));
 	exit;
 }
+
+
+
+
+
+// ! insert default post categories
+
+function dental_design_create_default_categories() {
+    $default_categories = apply_filters('dental_design_default_categories', array(
+        'Cosmetic Dental Services',
+        'Almost Invisible Braces',
+        'Dental Implant Services',
+        'Dental Emergency!',
+		'Routine Dental Care',
+		'Teeth Whitening Services',
+        'Denture Services'
+    ));
+
+    foreach ($default_categories as $category_name) {
+        if (!term_exists($category_name, 'category')) {
+            wp_insert_term($category_name, 'category');
+        }
+    }
+}
+add_action('after_switch_theme', 'dental_design_create_default_categories');
