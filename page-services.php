@@ -135,8 +135,62 @@ get_template_part('template-parts/top-nav');
 
 
 
-<!-- intro section -->
-<section class="container mx-auto px-4 py-10"></section>
+<!-- services section -->
+<section class="container mx-auto px-4 py-10">
+
+
+
+<?php
+
+$uncat = get_category_by_slug('uncategorized');
+$uncat_id = $uncat ? $uncat->term_id : 1;
+
+// Get 7 categories (exclude empty ones)
+$categories = get_categories([
+    'number'     => 7,
+    // 'hide_empty' => true,
+    'exclude'    => [$uncat_id],
+]);
+
+if ($categories) :
+    echo '<div class="category-cards" style="display:flex; flex-wrap:wrap; gap:20px;">';
+
+    foreach ($categories as $category) :
+        echo '<div class="category-card" style="border:1px solid #ddd; padding:20px; width:30%; box-shadow:0 2px 4px rgba(0,0,0,0.1);">';
+        
+        // Category title
+        echo '<h3>' . esc_html($category->name) . '</h3>';
+
+        // Get 5 latest posts in this category
+        $posts = get_posts([
+            'numberposts' => 5,
+            'category'    => $category->term_id,
+        ]);
+
+        if ($posts) :
+            echo '<ul>';
+            foreach ($posts as $post) :
+                setup_postdata($post);
+                echo '<li><a href="' . get_permalink($post) . '">' . esc_html(get_the_title($post)) . '</a></li>';
+            endforeach;
+            echo '</ul>';
+            wp_reset_postdata();
+        else :
+            echo '<p>No posts found.</p>';
+        endif;
+
+        echo '</div>'; // .category-card
+    endforeach;
+
+    echo '</div>'; // .category-cards
+else :
+    echo '<p>No categories found.</p>';
+endif;
+?>
+
+
+
+</section>
 
 
 
