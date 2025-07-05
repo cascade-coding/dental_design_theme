@@ -365,7 +365,7 @@ get_template_part('template-parts/top-nav');
 </section>
 
 <!-- our team section -->
-<section class="container mx-auto px-4 py-10">
+<section class="container mx-auto px-4 py-10 bg-white">
     <div class="flex items-start justify-between gap-x-6 flex-col lg:flex-row gap-y-6">
         <div class="w-full lg:w-1/2">
             <h3 class="font-primary text-3xl font-semibold our-team-title">
@@ -432,7 +432,7 @@ get_template_part('template-parts/top-nav');
 </section>
 
 <!-- our reviews -->
-<section class="py-10">
+<section class="py-10 bg-white">
     <h3 class="font-primary text-3xl font-semibold tracking-wide leading-relaxed text-center">Some of our Reviews</h3>
 
     <div class="mt-12 container mx-auto px-4">
@@ -451,7 +451,7 @@ get_template_part('template-parts/top-nav');
 
 
             <!-- Swiper -->
-            <div class="swiper swiper-home-reviews bg-white min-h-[220px] w-full relative">
+            <div class="swiper swiper-home-reviews min-h-[220px] w-full relative">
                 <div class="swiper-wrapper">
 
                     <?php
@@ -516,7 +516,7 @@ get_template_part('template-parts/top-nav');
         else: ?>
 
             <!-- Swiper -->
-            <div class="swiper swiper-home-reviews bg-white min-h-[220px] w-full relative">
+            <div class="swiper swiper-home-reviews min-h-[220px] w-full relative">
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide px-4">

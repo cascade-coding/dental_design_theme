@@ -1,6 +1,6 @@
 
 <!-- Location & Contact Information section -->
-<section class="bg-neutral-50 text-neutral-900 mt-4">
+<section class="bg-neutral-50 text-neutral-900 pt-4">
     <div class="container mx-auto px-4 py-10">
         <h3 class="text-3xl font-primary tracking-wide leading-relaxed font-semibold contact-title">
             <?php if (get_theme_mod('dental_design_contact_2_title')): ?>
@@ -180,7 +180,7 @@
 </section>
 
 <!-- location map -->
-<section class="bg-neutral-50 text-neutral-900 mt-4">
+<section class="bg-neutral-50 text-neutral-900 pt-4">
     <div class="location_map_link_text py-4 pl-10 text-transparent select-none"></div>
     <div class="py-5 text-transparent" style="width: 100%; height: 400px;">
         <?php
