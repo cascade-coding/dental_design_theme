@@ -138,29 +138,34 @@ get_template_part('template-parts/top-nav');
 <!-- services section -->
 <section class="container mx-auto px-4 py-10">
 
-
-
 <?php
 
 $uncat = get_category_by_slug('uncategorized');
 $uncat_id = $uncat ? $uncat->term_id : 1;
 
-// Get 7 categories (exclude empty ones)
 $categories = get_categories([
-    'number'     => 7,
-    // 'hide_empty' => true,
+    'number'     => 8,
+    'hide_empty' => false,
     'exclude'    => [$uncat_id],
 ]);
 
 if ($categories) :
-    echo '<div class="category-cards" style="display:flex; flex-wrap:wrap; gap:20px;">';
+?>
 
-    foreach ($categories as $category) :
-        echo '<div class="category-card" style="border:1px solid #ddd; padding:20px; width:30%; box-shadow:0 2px 4px rgba(0,0,0,0.1);">';
+<div class="category-wrapper" style="display:flex; flex-wrap:wrap; gap:20px;">
+
+<?php foreach ($categories as $category) : 
+    $image_url = get_term_meta($category->term_id, 'category_image', true); 
+?>
+    <div class="category-box" style="border:1px solid #ddd; padding:20px; width:30%; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
         
-        // Category title
-        echo '<h3>' . esc_html($category->name) . '</h3>';
+        <?php if ($image_url): ?>
+            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($category->name); ?>" style="width:100%; height:auto; max-height:200px; object-fit:cover; margin-bottom:10px;" />
+        <?php endif; ?>
 
+        <h3><?php echo esc_html($category->name); ?></h3>
+
+        <?php
         // Get 5 latest posts in this category
         $posts = get_posts([
             'numberposts' => 5,
@@ -178,16 +183,15 @@ if ($categories) :
         else :
             echo '<p>No posts found.</p>';
         endif;
+        ?>
+    </div>
+<?php endforeach; ?>
 
-        echo '</div>'; // .category-card
-    endforeach;
+</div>
 
-    echo '</div>'; // .category-cards
-else :
-    echo '<p>No categories found.</p>';
-endif;
-?>
-
+<?php else : ?>
+    <p>No categories found.</p>
+<?php endif; ?>
 
 
 </section>

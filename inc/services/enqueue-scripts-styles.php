@@ -46,3 +46,20 @@ function dental_design_scripts()
 }
 
 add_action('wp_enqueue_scripts', 'dental_design_scripts');
+
+
+
+
+add_action('admin_enqueue_scripts', 'custom_category_image_enqueue');
+function custom_category_image_enqueue($hook) {
+    if (strpos($hook, 'edit-tags.php') !== false || strpos($hook, 'term.php') !== false) {
+        wp_enqueue_media();
+        wp_enqueue_script(
+            'custom-category-image',
+            get_template_directory_uri() . '/assets/js/category-image.js',
+            [], // No jQuery
+            null,
+            true
+        );
+    }
+}
