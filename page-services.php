@@ -133,18 +133,19 @@ get_template_part('template-parts/top-nav');
 </section>
 
 
-
-
 <!-- services section -->
-<section class="container mx-auto px-4 py-10">
+<section class="container mx-auto px-4 py-10 pb-28">
+
+<div>
+    <h3 class="font-primary text-3xl font-semibold text-center pb-14 pt-4 text-neutral-900">Our services</h3>
+</div>
 
 <?php
-
 $uncat = get_category_by_slug('uncategorized');
 $uncat_id = $uncat ? $uncat->term_id : 1;
 
 $categories = get_categories([
-    'number'     => 8,
+    'number'     => 7,
     'hide_empty' => false,
     'exclude'    => [$uncat_id],
 ]);
@@ -152,47 +153,55 @@ $categories = get_categories([
 if ($categories) :
 ?>
 
-<div class="category-wrapper" style="display:flex; flex-wrap:wrap; gap:20px;">
-
-<?php foreach ($categories as $category) : 
-    $image_url = get_term_meta($category->term_id, 'category_image', true); 
+<div class="flex flex-wrap gap-8 justify-center">
+<?php foreach ($categories as $category) :
+    $image_url = get_term_meta($category->term_id, 'category_image', true);
+    $fallback_image_url = get_template_directory_uri() . '/assets/images/card-3.jpg';
+    $final_image_url = $image_url ?: $fallback_image_url;
 ?>
-    <div class="category-box" style="border:1px solid #ddd; padding:20px; width:30%; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
-        
-        <?php if ($image_url): ?>
-            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($category->name); ?>" style="width:100%; height:auto; max-height:200px; object-fit:cover; margin-bottom:10px;" />
-        <?php endif; ?>
 
-        <h3><?php echo esc_html($category->name); ?></h3>
+    <div 
+      style="background-image: url('<?php echo esc_url($final_image_url); ?>');"
+      class="relative bg-cover bg-center w-full md:w-[40%] min-h-[20rem] text-neutral-900 rounded-md overflow-hidden shadow-md"
+    >
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-primary-800/60 z-0"></div>
 
-        <?php
-        // Get 5 latest posts in this category
-        $posts = get_posts([
-            'numberposts' => 5,
-            'category'    => $category->term_id,
-        ]);
+        <div class="relative inset-0 z-10 flex flex-col justify-between p-6">
+            <h3 class="font-primary text-2xl font-semibold capitalize text-neutral-50">
+                <?php echo esc_html($category->name); ?>
+            </h3>
 
-        if ($posts) :
-            echo '<ul>';
-            foreach ($posts as $post) :
-                setup_postdata($post);
-                echo '<li><a href="' . get_permalink($post) . '">' . esc_html(get_the_title($post)) . '</a></li>';
-            endforeach;
-            echo '</ul>';
-            wp_reset_postdata();
-        else :
-            echo '<p>No posts found.</p>';
-        endif;
-        ?>
+            <?php
+            $posts = get_posts([
+                'numberposts' => 5,
+                'category'    => $category->term_id,
+            ]);
+
+            if ($posts) :
+                echo '<div class="flex flex-col gap-2 text-neutral-50 text-base pt-4 pl-3">';
+                foreach ($posts as $post) :
+                    setup_postdata($post);
+                    echo '<div class="flex items-center gap-2">';
+                    echo '<span class="mt-1 w-1 h-1 rounded-full bg-neutral-50 flex-shrink-0"></span>';
+                    echo '<a class="hover:underline underline-offset-4" href="' . get_permalink($post) . '">' . esc_html(get_the_title($post)) . '</a>';
+                    echo '</div>';
+                endforeach;
+                echo '</div>';
+                wp_reset_postdata();
+            else :
+                echo '<p class="text-neutral-100 pt-4 pl-3">No posts found.</p>';
+            endif;
+            ?>
+        </div>
     </div>
-<?php endforeach; ?>
 
+<?php endforeach; ?>
 </div>
 
 <?php else : ?>
     <p>No categories found.</p>
 <?php endif; ?>
-
 
 </section>
 
