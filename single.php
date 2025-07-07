@@ -16,7 +16,10 @@ get_template_part('template-parts/top-nav');
 
 	<div class="bg-white pb-10">
 
-	<?php if ( has_post_thumbnail() ) : ?>
+
+    <?php if ( get_post_meta(get_the_ID(), '_show_feature_image', true) && has_post_thumbnail() ) : ?>
+
+
     <div class="relative border-b-4 border-b-primary-500">
         <?php the_post_thumbnail('full', ['class' => 'w-full max-h-[400px] object-cover']); ?>
 
