@@ -15,6 +15,16 @@ const COLORS = [
   { label: 'Yellow', value: 'bg-yellow-100' },
   { label: 'Blue', value: 'bg-blue-100' },
   { label: 'Neutral', value: 'bg-neutral-100' },
+  { label: 'Primary-400', value: 'bg-primary-400' },
+  { label: 'Primary-500', value: 'bg-primary-500' },
+  { label: 'Primary-600', value: 'bg-primary-600' },
+  { label: 'Primary-700', value: 'bg-primary-700' },
+  { label: 'Primary-800', value: 'bg-primary-800' },
+  { label: 'Primary-900', value: 'bg-primary-900' },
+  { label: 'Neutral-500', value: 'bg-neutral-500' },
+  { label: 'Neutral-600', value: 'bg-neutral-600' },
+  { label: 'Neutral-700', value: 'bg-neutral-700' },
+  { label: 'Neutral-800', value: 'bg-neutral-800' },
 ];
 
 registerBlockType('mytheme/section-block', {
@@ -29,7 +39,7 @@ registerBlockType('mytheme/section-block', {
   },
   edit({ attributes, setAttributes }) {
     const blockProps = useBlockProps({
-      className: `${attributes.backgroundColor} p-6 rounded-md`,
+      className: `${attributes.backgroundColor} p-6`,
     });
 
     return (
@@ -52,7 +62,7 @@ registerBlockType('mytheme/section-block', {
   },
   save({ attributes }) {
     const blockProps = useBlockProps.save({
-      className: `${attributes.backgroundColor} p-6 rounded-md`,
+      className: `${attributes.backgroundColor} p-6`,
     });
 
     return (

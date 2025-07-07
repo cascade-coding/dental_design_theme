@@ -20,7 +20,9 @@
     --color-neutral-200: oklch(92.2% 0 0);
     --color-neutral-300: oklch(87% 0 0);
     --color-neutral-400: oklch(70.8% 0 0);
+    --color-neutral-500: oklch(55.6% 0 0);
     --color-neutral-600: oklch(43.9% 0 0);
+    --color-neutral-700: oklch(37.1% 0 0);
     --color-neutral-800: oklch(26.9% 0 0);
     --color-neutral-900: oklch(20.5% 0 0);
     --color-neutral-950: oklch(14.5% 0 0);
@@ -57,6 +59,7 @@
     --color-primary-400: #2fd2bd;
     --color-primary-500: #16b6a4;
     --color-primary-600: #0f9287;
+    --color-primary-700: #10756d;
     --color-primary-800: #125d58;
     --color-primary-900: #144d49;
     --color-primary-950: #053332;
@@ -1113,8 +1116,14 @@
   .bg-neutral-200 {
     background-color: var(--color-neutral-200);
   }
+  .bg-neutral-500 {
+    background-color: var(--color-neutral-500);
+  }
   .bg-neutral-600 {
     background-color: var(--color-neutral-600);
+  }
+  .bg-neutral-700 {
+    background-color: var(--color-neutral-700);
   }
   .bg-neutral-800 {
     background-color: var(--color-neutral-800);
@@ -1142,6 +1151,18 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-primary-100) 50%, transparent);
     }
+  }
+  .bg-primary-400 {
+    background-color: var(--color-primary-400);
+  }
+  .bg-primary-500 {
+    background-color: var(--color-primary-500);
+  }
+  .bg-primary-600 {
+    background-color: var(--color-primary-600);
+  }
+  .bg-primary-700 {
+    background-color: var(--color-primary-700);
   }
   .bg-primary-800 {
     background-color: var(--color-primary-800);
