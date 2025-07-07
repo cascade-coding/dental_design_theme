@@ -1,40 +1,51 @@
 <?php
-/**
- * The template for displaying all single posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package dental_design
- */
-
 get_header();
+
+get_template_part('template-parts/top-nav');
 ?>
 
-	<main id="primary" class="site-main">
+<div data-page="single-post" id="page-info"></div>
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+<main id="primary" class="bg-emerald-950">
+    <?php
+    while ( have_posts() ) :
+        the_post();
+    ?>
 
-			get_template_part( 'template-parts/content', get_post_type() );
+<div class="container mx-auto px-4 min-h-full">
 
-			the_post_navigation(
-				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'dental_design' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'dental_design' ) . '</span> <span class="nav-title">%title</span>',
-				)
-			);
+	<div class="bg-white pb-10">
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+	<?php if ( has_post_thumbnail() ) : ?>
+    <div class="relative border-b-4 border-b-primary-500">
+        <?php the_post_thumbnail('full', ['class' => 'w-full max-h-[400px] object-cover']); ?>
 
-		endwhile; // End of the loop.
-		?>
+        <div class="absolute bottom-0 left-0 w-full bg-neutral-950/50">
+            <h1 class="font-primary text-4xl font-bold text-neutral-50 py-6 px-4 
+                       truncate whitespace-nowrap overflow-hidden">
+                <?php the_title(); ?>
+            </h1>
+        </div>
+    </div>
+	<?php endif; ?>
 
-	</main><!-- #main -->
+			
+		<div class="prose max-w-none post-content">
+			<?php the_content(); ?>
+		</div>
+
+	</div>
+
+</div>
+
+    <?php endwhile; ?>
+
+
+</main>
 
 <?php
-get_sidebar();
+get_template_part('template-parts/location-contact');
+get_template_part('template-parts/footer-section');
+
 get_footer();
+?>

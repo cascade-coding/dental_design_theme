@@ -1,0 +1,5 @@
+/* Optional: fallback styles for editor if Tailwind isn't loaded */
+.wp-block-mytheme-section-block {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}

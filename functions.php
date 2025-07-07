@@ -286,3 +286,54 @@ function save_category_image_meta($term_id, $tt_id) {
         update_term_meta($term_id, 'category_image', esc_url_raw($_POST['category_image']));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mytheme_register_section_block() {
+    wp_register_script(
+        'mytheme-section-block',
+        get_template_directory_uri() . '/build/index.js',
+        ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-block-editor'],
+        filemtime(get_template_directory() . '/build/index.js'),
+        true
+    );
+
+    wp_register_style(
+        'mytheme-section-block-style',
+        get_template_directory_uri() . '/src/blocks/section-block/style.css',
+        [],
+        filemtime(get_template_directory() . '/src/blocks/section-block/style.css')
+    );
+
+    register_block_type('mytheme/section-block', [
+        'editor_script' => 'mytheme-section-block',
+        'style'         => 'mytheme-section-block-style', // or 'editor_style' if only for backend
+    ]);
+
+    // Optional, for translations
+    // wp_set_script_translations('mytheme-section-block', 'mytheme');
+}
+add_action('init', 'mytheme_register_section_block');
+
+
+
+
+
+
+add_action('after_setup_theme', function() {
+    add_theme_support('editor-styles');
+    add_editor_style('tw.css'); // Must include Tailwind build
+});

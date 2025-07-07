@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 
 @theme {
   --color-primary-50: #f0fdfa;
@@ -238,4 +240,11 @@ body {
 
 .doctor-section > .card:nth-child(even) > div{
   flex-direction: row-reverse !important;
+}
+
+
+
+/* post content */
+.post-content h1, h2, h3, h4, h5, h6{
+  font-family: Montserrat, sans-serif;
 }
