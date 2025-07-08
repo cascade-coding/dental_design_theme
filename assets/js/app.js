@@ -229,6 +229,38 @@ function servicesPage() {
   });
 }
 
+
+
+
+function singlePostPage() {
+  console.log('working............')
+   // ! popups
+  const appointment_trigger_btn = document.querySelector(
+    ".appointment-trigger-btn"
+  );
+  const appointment_popup = document.querySelector(".appointment-popup");
+
+  appointment_trigger_btn.addEventListener("click", () => {
+    appointment_popup.classList.add("appointment_popup_show");
+  });
+
+  document.addEventListener("click", function (e) {
+    const appointment_popup_form = document
+      .getElementById("appointment_popup_form")
+      .contains(e.target);
+
+    if (
+      !appointment_popup_form &&
+      !appointment_trigger_btn.contains(e.target)
+    ) {
+      appointment_popup.classList.remove("appointment_popup_show");
+    }
+  });
+}
+
+
+
+
 // conditionally rendering based on page
 const pageInfo = document.getElementById("page-info");
 
@@ -242,4 +274,8 @@ if (pageInfo && pageInfo.dataset.page === "about-page") {
 
 if (pageInfo && pageInfo.dataset.page === "services-page") {
   servicesPage();
+}
+
+if (pageInfo && pageInfo.dataset.page === "single-post-page") {
+  singlePostPage();
 }

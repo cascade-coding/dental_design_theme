@@ -192,6 +192,11 @@
     @apply w-full px-3 py-3 bg-neutral-50 text-neutral-900 outline-0 border-2 border-transparent border-b-primary-500 focus:border-b-primary-400 placeholder:text-neutral-900;
   }
 
+  
+  .post-content > *:not(.wp-block-dental-design-section-block) {
+    @apply px-2 md:px-4
+  }
+
 }
 
 body {
@@ -238,8 +243,8 @@ body {
   background-color: var(--color-primary-800);
 }
 
-.doctor-section > .card:nth-child(even) > div{
-  flex-direction: row-reverse !important;
+.doctor-section > .card:nth-child(even) > div {
+  @apply lg:flex-row-reverse
 }
 
 
@@ -247,4 +252,9 @@ body {
 /* post content */
 .post-content h1, h2, h3, h4, h5, h6{
   font-family: Montserrat, sans-serif;
+}
+
+
+.wp-block-columns {
+  margin-bottom: 0 !important;
 }

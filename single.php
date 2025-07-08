@@ -4,15 +4,16 @@ get_header();
 get_template_part('template-parts/top-nav');
 ?>
 
-<div data-page="single-post" id="page-info"></div>
+<div data-page="single-post-page" id="page-info"></div>
 
-<main id="primary" class="bg-emerald-950">
-    <?php
+<main id="primary">
+
+<?php
     while ( have_posts() ) :
         the_post();
-    ?>
+?>
 
-<div class="container mx-auto px-4 min-h-full">
+<div class="xl:container mx-auto px-0 md:px-4 min-h-full">
 
 	<div class="bg-white pb-10">
 
@@ -20,7 +21,7 @@ get_template_part('template-parts/top-nav');
     <?php if ( get_post_meta(get_the_ID(), '_show_feature_image', true) && has_post_thumbnail() ) : ?>
 
 
-    <div class="relative border-b-4 border-b-primary-500">
+    <div class="relative">
         <?php the_post_thumbnail('full', ['class' => 'w-full max-h-[400px] object-cover']); ?>
 
         <div class="absolute bottom-0 left-0 w-full bg-neutral-950/50">
@@ -30,12 +31,14 @@ get_template_part('template-parts/top-nav');
             </h1>
         </div>
     </div>
+
 	<?php endif; ?>
 
-			
+
 		<div class="prose max-w-none post-content">
 			<?php the_content(); ?>
 		</div>
+        
 
 	</div>
 
