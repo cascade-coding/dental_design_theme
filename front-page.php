@@ -412,7 +412,7 @@ get_template_part('template-parts/top-nav');
             ?>
 
             <div>
-                <a href="<?php echo $about_url ? esc_url($about_url) : '#'; ?>"
+                <a href="<?php echo $about_url ? esc_url($about_url) : './about-us'; ?>"
                     class="!no-underline bg-primary-800 px-6 py-2 rounded-full text-neutral-50 mt-5 text-lg font-medium hover:bg-primary-900 transition-all min-w-36 inline-block text-center our-team-about-button-text">
                     <?php echo $about_button_text ? esc_html($about_button_text) : 'Read More About Us'; ?>
                 </a>
