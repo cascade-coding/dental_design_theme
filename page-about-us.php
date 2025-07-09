@@ -22,11 +22,11 @@ get_template_part('template-parts/top-nav');
             'order' => 'ASC',
         );
 
-        $aboutHero = new WP_Query($args);
+$aboutHero = new WP_Query($args);
 
-        if ($aboutHero->have_posts()):
+if ($aboutHero->have_posts()):
 
-            ?>
+    ?>
 
             <!-- Swiper -->
             <div class="swiper swiper-about-top bg-accent-500 !h-[492px] w-full relative">
@@ -34,22 +34,22 @@ get_template_part('template-parts/top-nav');
 
                     <?php
 
-                    while ($aboutHero->have_posts()) {
+            while ($aboutHero->have_posts()) {
 
-                        $aboutHero->the_post();
+                $aboutHero->the_post();
 
-                        $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
-                        $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
-                        $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
-                        $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
-                        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                        $title = get_the_title();
+                $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
+                $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
+                $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
+                $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
+                $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                $title = get_the_title();
 
-                        if (!$image_url) {
-                            continue;
-                        }
+                if (!$image_url) {
+                    continue;
+                }
 
-                        ?>
+                ?>
 
 
                         <div class="swiper-slide relative">
@@ -88,11 +88,11 @@ get_template_part('template-parts/top-nav');
 
 
                         <?php
-                        wp_reset_postdata();
-                    }
+            }
+    wp_reset_postdata();
 
 
-                    ?>
+    ?>
 
                 </div>
 
@@ -100,9 +100,7 @@ get_template_part('template-parts/top-nav');
                 <!-- Pagination Dots -->
                 <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
             </div>
-            <?php
-
-        else: ?>
+            <?php else: ?>
 
             <!-- Swiper -->
             <div class="swiper swiper-about-top bg-accent-500 !h-[492px] w-full relative">
@@ -127,7 +125,7 @@ get_template_part('template-parts/top-nav');
 
             <?php
 
-        endif; ?>
+            endif; ?>
 
     </div>
 </section>
@@ -169,27 +167,27 @@ get_template_part('template-parts/top-nav');
         <div class="w-full lg:w-1/2 about-vid-intro-video">
             <?php
 
-            $video_file_id = get_theme_mod('dental_design_about_intro_video_file');
-            $video_url = get_theme_mod('dental_design_about_intro_video_url');
+                $video_file_id = get_theme_mod('dental_design_about_intro_video_file');
+$video_url = get_theme_mod('dental_design_about_intro_video_url');
 
-            if ($video_file_id) {
-                $video_src = wp_get_attachment_url($video_file_id);
+if ($video_file_id) {
+    $video_src = wp_get_attachment_url($video_file_id);
 
-                echo '<video controls class="w-full h-auto">
+    echo '<video controls class="w-full h-auto">
                 <source src="' . esc_url($video_src) . '" type="video/mp4">
                 Your browser does not support the video tag.
               </video>';
-            } elseif ($video_url) {
-                // You can embed YouTube/Vimeo or direct URL fallback here
-                echo '<iframe class="w-full h-[300px] md:h-[400px] 2xl:h-[440px]"  src="' . esc_url($video_url) . '" frameborder="0" allowfullscreen></iframe>';
-            } else {
-                echo '<video controls class="w-full h-auto">
+} elseif ($video_url) {
+    // You can embed YouTube/Vimeo or direct URL fallback here
+    echo '<iframe class="w-full h-[300px] md:h-[400px] 2xl:h-[440px]"  src="' . esc_url($video_url) . '" frameborder="0" allowfullscreen></iframe>';
+} else {
+    echo '<video controls class="w-full h-auto">
                 <source src="' . esc_url(get_template_directory_uri() . '/assets/videos/intro_video.mp4') . '" type="video/mp4">
                 Your browser does not support the video tag.
               </video>';
-            }
+}
 
-            ?>
+?>
 
 
         </div>
@@ -209,9 +207,9 @@ get_template_part('template-parts/top-nav');
 <?php
 
 $args = array(
-	'post_type'      => 'doctor',
-	'posts_per_page' => 3,
-	'post_status'    => 'publish',
+    'post_type'      => 'doctor',
+    'posts_per_page' => 3,
+    'post_status'    => 'publish',
 );
 
 $doctors = new WP_Query($args);
@@ -224,11 +222,11 @@ if ($doctors->have_posts()) : ?>
 
                 <div class="container mx-auto px-4 py-10 flex items-center lg:items-start justify-between gap-8 flex-col lg:flex-row">
                     <div class="w-full lg:w-1/4 flex items-center justify-center lg:justify-start">
-                        <?php 
+                        <?php
                             $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                            if ($image_url) : 
-                            
-                            ?>
+		    if ($image_url) :
+
+		        ?>
                             <div class="doctor-image">
                                 <img class="w-full max-w-[280px] lg:max-w-full h-auto" src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
                             </div>
@@ -337,7 +335,7 @@ if ($doctors->have_posts()) : ?>
 
 <?php
     get_template_part('template-parts/location-contact');
-    get_template_part('template-parts/footer-section');
-    
-    get_footer();
+get_template_part('template-parts/footer-section');
+
+get_footer();
 ?>

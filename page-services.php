@@ -22,11 +22,11 @@ get_template_part('template-parts/top-nav');
             'order' => 'ASC',
         );
 
-        $servicesHero = new WP_Query($args);
+$servicesHero = new WP_Query($args);
 
-        if ($servicesHero->have_posts()):
+if ($servicesHero->have_posts()):
 
-            ?>
+    ?>
 
             <!-- Swiper -->
             <div class="swiper swiper-services-top bg-accent-500 !h-[492px] w-full relative">
@@ -34,22 +34,22 @@ get_template_part('template-parts/top-nav');
 
                     <?php
 
-                    while ($servicesHero->have_posts()) {
+            while ($servicesHero->have_posts()) {
 
-                        $servicesHero->the_post();
+                $servicesHero->the_post();
 
-                        $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
-                        $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
-                        $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
-                        $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
-                        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                        $title = get_the_title();
+                $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
+                $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
+                $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
+                $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
+                $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                $title = get_the_title();
 
-                        if (!$image_url) {
-                            continue;
-                        }
+                if (!$image_url) {
+                    continue;
+                }
 
-                        ?>
+                ?>
 
 
                         <div class="swiper-slide relative">
@@ -87,12 +87,12 @@ get_template_part('template-parts/top-nav');
 
 
 
-                        <?php
-                        wp_reset_postdata();
-                    }
+                    <?php
+            }
 
+    wp_reset_postdata();
 
-                    ?>
+    ?>
 
                 </div>
 
@@ -100,9 +100,7 @@ get_template_part('template-parts/top-nav');
                 <!-- Pagination Dots -->
                 <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
             </div>
-            <?php
-
-        else: ?>
+            <?php else: ?>
 
             <!-- Swiper -->
             <div class="swiper swiper-services-top bg-accent-500 !h-[492px] w-full relative">
@@ -127,7 +125,7 @@ get_template_part('template-parts/top-nav');
 
             <?php
 
-        endif; ?>
+            endif; ?>
 
     </div>
 </section>
@@ -151,14 +149,14 @@ $categories = get_categories([
 ]);
 
 if ($categories) :
-?>
+    ?>
 
 <div class="flex flex-wrap gap-8 justify-center">
 <?php foreach ($categories as $category) :
     $image_url = get_term_meta($category->term_id, 'category_image', true);
     $fallback_image_url = get_template_directory_uri() . '/assets/images/card-3.jpg';
     $final_image_url = $image_url ?: $fallback_image_url;
-?>
+    ?>
 
     <div 
       style="background-image: url('<?php echo esc_url($final_image_url); ?>');"
@@ -173,26 +171,26 @@ if ($categories) :
             </h3>
 
             <?php
-            $posts = get_posts([
-                'numberposts' => 5,
-                'category'    => $category->term_id,
-            ]);
+                $posts = get_posts([
+                    'numberposts' => 5,
+                    'category'    => $category->term_id,
+                ]);
 
-            if ($posts) :
-                echo '<div class="flex flex-col gap-2 text-neutral-50 text-base pt-4 pl-3">';
-                foreach ($posts as $post) :
-                    setup_postdata($post);
-                    echo '<div class="flex items-center gap-2">';
-                    echo '<span class="mt-1 w-1 h-1 rounded-full bg-neutral-50 flex-shrink-0"></span>';
-                    echo '<a class="hover:underline underline-offset-4" href="' . get_permalink($post) . '">' . esc_html(get_the_title($post)) . '</a>';
-                    echo '</div>';
-                endforeach;
-                echo '</div>';
-                wp_reset_postdata();
-            else :
-                echo '<p class="text-neutral-100 pt-4 pl-3">No posts found.</p>';
-            endif;
-            ?>
+    if ($posts) :
+        echo '<div class="flex flex-col gap-2 text-neutral-50 text-base pt-4 pl-3">';
+        foreach ($posts as $post) :
+            setup_postdata($post);
+            echo '<div class="flex items-center gap-2">';
+            echo '<span class="mt-1 w-1 h-1 rounded-full bg-neutral-50 flex-shrink-0"></span>';
+            echo '<a class="hover:underline underline-offset-4" href="' . get_permalink($post) . '">' . esc_html(get_the_title($post)) . '</a>';
+            echo '</div>';
+        endforeach;
+        echo '</div>';
+        wp_reset_postdata();
+    else :
+        echo '<p class="text-neutral-100 pt-4 pl-3">No posts found.</p>';
+    endif;
+    ?>
         </div>
     </div>
 
@@ -211,7 +209,7 @@ if ($categories) :
 
 <?php
     get_template_part('template-parts/location-contact');
-    get_template_part('template-parts/footer-section');
-    
-    get_footer();
+get_template_part('template-parts/footer-section');
+
+get_footer();
 ?>

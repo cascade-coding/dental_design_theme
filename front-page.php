@@ -26,11 +26,11 @@ get_template_part('template-parts/top-nav');
         'order' => 'ASC',
     );
 
-    $slider_query = new WP_Query($args);
+$slider_query = new WP_Query($args);
 
-    if ($slider_query->have_posts()):
+if ($slider_query->have_posts()):
 
-        ?>
+    ?>
 
 
         <!-- Swiper -->
@@ -39,22 +39,22 @@ get_template_part('template-parts/top-nav');
 
                 <?php
 
-                while ($slider_query->have_posts()) {
+            while ($slider_query->have_posts()) {
 
-                    $slider_query->the_post();
+                $slider_query->the_post();
 
-                    $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
-                    $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
-                    $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
-                    $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
-                    $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                    $title = get_the_title();
+                $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
+                $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
+                $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
+                $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
+                $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                $title = get_the_title();
 
-                    if (!$image_url) {
-                        continue;
-                    }
+                if (!$image_url) {
+                    continue;
+                }
 
-                    ?>
+                ?>
 
                     <div class="swiper-slide relative">
                         <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
@@ -72,11 +72,11 @@ get_template_part('template-parts/top-nav');
                     </div>
 
                     <?php
-                    wp_reset_postdata();
-                }
+            }
+    wp_reset_postdata();
 
 
-                ?>
+    ?>
 
                 <div class="absolute left-1/2 transform -translate-x-1/2 container h-full z-50 top-0">
                     <div class="absolute top-10 right-4 w-[380px] hidden lg:block">
@@ -94,9 +94,7 @@ get_template_part('template-parts/top-nav');
 
             </div>
         </div>
-        <?php
-
-    else: ?>
+        <?php else: ?>
 
 
         <!-- Swiper -->
@@ -146,9 +144,9 @@ get_template_part('template-parts/top-nav');
         </div>
 
         <?php
-    endif;
+        endif;
 
-    ?>
+?>
 
 </section>
 
@@ -191,27 +189,27 @@ get_template_part('template-parts/top-nav');
         <div class="w-full lg:w-1/2 vid-intro-video">
             <?php
 
-            $video_file_id = get_theme_mod('dental_design_intro_video_file');
-            $video_url = get_theme_mod('dental_design_intro_video_url');
+        $video_file_id = get_theme_mod('dental_design_intro_video_file');
+$video_url = get_theme_mod('dental_design_intro_video_url');
 
-            if ($video_file_id) {
-                $video_src = wp_get_attachment_url($video_file_id);
+if ($video_file_id) {
+    $video_src = wp_get_attachment_url($video_file_id);
 
-                echo '<video controls class="w-full h-auto">
+    echo '<video controls class="w-full h-auto">
                 <source src="' . esc_url($video_src) . '" type="video/mp4">
                 Your browser does not support the video tag.
               </video>';
-            } elseif ($video_url) {
-                // You can embed YouTube/Vimeo or direct URL fallback here
-                echo '<iframe class="w-full h-[300px] md:h-[400px] 2xl:h-[440px]"  src="' . esc_url($video_url) . '" frameborder="0" allowfullscreen></iframe>';
-            } else {
-                echo '<video controls class="w-full h-auto">
+} elseif ($video_url) {
+    // You can embed YouTube/Vimeo or direct URL fallback here
+    echo '<iframe class="w-full h-[300px] md:h-[400px] 2xl:h-[440px]"  src="' . esc_url($video_url) . '" frameborder="0" allowfullscreen></iframe>';
+} else {
+    echo '<video controls class="w-full h-auto">
                 <source src="' . esc_url(get_template_directory_uri() . '/assets/videos/intro_video.mp4') . '" type="video/mp4">
                 Your browser does not support the video tag.
               </video>';
-            }
+}
 
-            ?>
+?>
 
 
         </div>
@@ -228,19 +226,19 @@ get_template_part('template-parts/top-nav');
 
         <?php
         $args = array(
-            'post_type' => 'slider',
-            'meta_key' => '_slider_type',
-            'meta_value' => 'home-middle',
-            'posts_per_page' => -1,
-            'orderby' => 'menu_order',
-            'order' => 'ASC',
+'post_type' => 'slider',
+'meta_key' => '_slider_type',
+'meta_value' => 'home-middle',
+'posts_per_page' => -1,
+'orderby' => 'menu_order',
+'order' => 'ASC',
         );
 
-        $offers = new WP_Query($args);
+$offers = new WP_Query($args);
 
-        if ($offers->have_posts()):
+if ($offers->have_posts()):
 
-            ?>
+    ?>
 
             <!-- Swiper -->
             <div class="swiper swiper-home-middle bg-accent-500 !h-[492px] w-full relative">
@@ -248,22 +246,22 @@ get_template_part('template-parts/top-nav');
 
                     <?php
 
-                    while ($offers->have_posts()) {
+            while ($offers->have_posts()) {
 
-                        $offers->the_post();
+                $offers->the_post();
 
-                        $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
-                        $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
-                        $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
-                        $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
-                        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                        $title = get_the_title();
+                $heading = get_post_meta(get_the_ID(), '_slider_heading', true);
+                $subtext = get_post_meta(get_the_ID(), '_slider_subtext', true);
+                $button_text = get_post_meta(get_the_ID(), '_slider_button_text', true);
+                $button_link = get_post_meta(get_the_ID(), '_slider_button_link', true);
+                $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                $title = get_the_title();
 
-                        if (!$image_url) {
-                            continue;
-                        }
+                if (!$image_url) {
+                    continue;
+                }
 
-                        ?>
+                ?>
 
                         <div class="swiper-slide relative">
                             <img src="<?php echo esc_url($image_url); ?>" alt="" srcset="">
@@ -294,20 +292,18 @@ get_template_part('template-parts/top-nav');
                         </div>
 
                         <?php
-                        wp_reset_postdata();
-                    }
+            }
+    wp_reset_postdata();
 
 
-                    ?>
+    ?>
 
                 </div>
 
                 <!-- Pagination Dots -->
                 <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
             </div>
-            <?php
-
-        else: ?>
+            <?php else: ?>
 
             <!-- Swiper -->
             <div class="swiper swiper-home-middle bg-accent-500 !h-[492px] w-full relative">
@@ -359,7 +355,7 @@ get_template_part('template-parts/top-nav');
 
             <?php
 
-        endif; ?>
+            endif; ?>
 
     </div>
 </section>
@@ -407,9 +403,9 @@ get_template_part('template-parts/top-nav');
             </p>
 
             <?php
-            $about_url = get_theme_mod('dental_design_our_team_about_url');
-            $about_button_text = get_theme_mod('dental_design_our_team_about_button_text');
-            ?>
+                $about_url = get_theme_mod('dental_design_our_team_about_url');
+$about_button_text = get_theme_mod('dental_design_our_team_about_button_text');
+?>
 
             <div>
                 <a href="<?php echo $about_url ? esc_url($about_url) : './about-us'; ?>"
@@ -420,10 +416,10 @@ get_template_part('template-parts/top-nav');
         </div>
         <div class="w-full lg:w-1/2 self-center our-team-photo">
             <?php
-            $team_photo_id = get_theme_mod('dental_design_our_team_photo');
-            $team_photo = wp_get_attachment_url($team_photo_id);
-            $final_image = $team_photo ? $team_photo : get_template_directory_uri() . '/assets/images/our-team.jpg';
-            ?>
+$team_photo_id = get_theme_mod('dental_design_our_team_photo');
+$team_photo = wp_get_attachment_url($team_photo_id);
+$final_image = $team_photo ? $team_photo : get_template_directory_uri() . '/assets/images/our-team.jpg';
+?>
             <img src="<?php echo esc_url($final_image); ?>" alt="Team Image" />
 
         </div>
@@ -439,15 +435,15 @@ get_template_part('template-parts/top-nav');
 
         <?php
         $args = array(
-            'post_type' => 'review',
-            'posts_per_page' => -1,
+'post_type' => 'review',
+'posts_per_page' => -1,
         );
 
-        $reviews = new WP_Query($args);
+$reviews = new WP_Query($args);
 
-        if ($reviews->have_posts()):
+if ($reviews->have_posts()):
 
-            ?>
+    ?>
 
 
             <!-- Swiper -->
@@ -456,22 +452,22 @@ get_template_part('template-parts/top-nav');
 
                     <?php
 
-                    while ($reviews->have_posts()) {
+            while ($reviews->have_posts()) {
 
-                        $reviews->the_post();
+                $reviews->the_post();
 
-                        $reviewer_name = get_post_meta(get_the_ID(), '_reviewer_name', true);
-                        $review_stars = get_post_meta(get_the_ID(), '_review_stars', true);
-                        $review_text = get_post_meta(get_the_ID(), '_review_text', true);
-                        $reviewer_photo = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                        $title = get_the_title();
+                $reviewer_name = get_post_meta(get_the_ID(), '_reviewer_name', true);
+                $review_stars = get_post_meta(get_the_ID(), '_review_stars', true);
+                $review_text = get_post_meta(get_the_ID(), '_review_text', true);
+                $reviewer_photo = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                $title = get_the_title();
 
 
-                        if (!$reviewer_name || !$review_stars || !$review_text) {
-                            continue;
-                        }
+                if (!$reviewer_name || !$review_stars || !$review_text) {
+                    continue;
+                }
 
-                        ?>
+                ?>
 
                         <div class="swiper-slide px-4">
 
@@ -486,11 +482,11 @@ get_template_part('template-parts/top-nav');
 
                                     <div class="text-left px-1 mt-2">
                                         <?php
-                                        $stars = intval($review_stars);
-                                        for ($i = 0; $i < 5; $i++) {
-                                            echo $i < $stars ? '⭐' : '☆';
-                                        }
-                                        ?>
+                                $stars = intval($review_stars);
+                for ($i = 0; $i < 5; $i++) {
+                    echo $i < $stars ? '⭐' : '☆';
+                }
+                ?>
                                     </div>
 
                                 </div>
@@ -499,11 +495,11 @@ get_template_part('template-parts/top-nav');
                         </div>
 
                         <?php
-                        wp_reset_postdata();
-                    }
+            }
+    wp_reset_postdata();
 
 
-                    ?>
+    ?>
 
                 </div>
 
@@ -511,9 +507,7 @@ get_template_part('template-parts/top-nav');
                 <!-- Pagination Dots -->
                 <div class="swiper-pagination absolute bottom-0 py-2 w-full"></div>
             </div>
-            <?php
-
-        else: ?>
+            <?php else: ?>
 
             <!-- Swiper -->
             <div class="swiper swiper-home-reviews min-h-[220px] w-full relative">
@@ -592,7 +586,7 @@ get_template_part('template-parts/top-nav');
 
 <?php
     get_template_part('template-parts/location-contact');
-    get_template_part('template-parts/footer-section');
-    
-    get_footer();
+get_template_part('template-parts/footer-section');
+
+get_footer();
 ?>
