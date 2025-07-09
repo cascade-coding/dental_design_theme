@@ -184,6 +184,8 @@ require_once get_template_directory() . '/inc/services/register-custom-blocks.ph
 
 require_once get_template_directory() . '/inc/services/custom-post-sidebar-options.php';
 
+require_once get_template_directory() . '/inc/services/create-example-post.php';
+
 
 
 // start session
@@ -194,6 +196,34 @@ function start_session_for_flash_message()
 	}
 }
 add_action('init', 'start_session_for_flash_message');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
