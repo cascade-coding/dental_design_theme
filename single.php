@@ -13,7 +13,7 @@ get_template_part('template-parts/top-nav');
         the_post();
 ?>
 
-<div class="xl:container mx-auto px-0 md:px-4 min-h-full">
+<div class="xl:container mx-auto px-0 md:px-4 min-h-96">
 
 	<div class="bg-white pb-10">
 
